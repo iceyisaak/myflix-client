@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom';
 // Import scss file (and bundle it too)
 import './index.scss';
 
+// Main Component
 class MyFlixApp extends React.Component{
 
   render() {
@@ -18,9 +19,9 @@ class MyFlixApp extends React.Component{
 
 }
 
-// Assign 'container' to this className
+// Assign 'container' to the root className
 const container = document.getElementsByClassName('app-container')[0];
 
-// Render this element where the 'container' is
+// Render this element wherever the 'container' is
 ReactDOM.render(React.createElement(MyFlixApp), container);
 
