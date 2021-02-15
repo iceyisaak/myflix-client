@@ -1,6 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
+// Import MainView Component
+import {MainView} from './components/main-view/main-view';
+
 // Import scss file (and bundle it too)
 import './index.scss';
 
@@ -8,15 +11,8 @@ import './index.scss';
 class MyFlixApp extends React.Component{
 
   render() {
-    return (
-      <div className="my-flix">
-        <div>
-          Hello World - MyFlixApp
-        </div>
-      </div>
-    )
+    return <MainView/>;
   }
-
 }
 
 // Assign 'container' to the root className
@@ -24,4 +20,3 @@ const container = document.getElementsByClassName('app-container')[0];
 
 // Render this element wherever the 'container' is
 ReactDOM.render(React.createElement(MyFlixApp), container);
-
