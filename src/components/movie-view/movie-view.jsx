@@ -55,6 +55,9 @@ export class MovieView extends React.Component{
              {movie.Director.Name}
            </span>
          </div>
+         <button onClick={() => location.reload()}>
+           Back
+         </button>
       </div>
     );
   }
