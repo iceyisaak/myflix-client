@@ -1,97 +1,90 @@
 import React from 'react';
 import axios from 'axios';
 
-import {MovieCard} from '../movie-card/movie-card';
-import {MovieView} from '../main-view/main-view';
+import { MovieCard } from '../movie-card/movie-card';
+// import { MovieView } from '../movie-view/movie-view';
+import { MovieView2 } from '../movie-view/movie-view2';
 
-export class MainView extends React.Component{
+export class MainView extends React.Component {
 
-  constructor(){
+  constructor() {
     super();
 
-    // Initialise all the states to be used in the component
-    this.state ={
+    this.state = {
       movies: null,
       selectedMovie: null
     };
   }
- 
-  // When component is inserted into DOM
+
   componentDidMount(){
 
-    // Get Data from API
-    axios.get('https://myflix-20210211.herokuapp.com/movies/')
-
-    // Then bring in the response from server
-      .then(
-        response => {
-          // Assign result to the state
-          this.setState({
-            movies: response.data
+        // Get Data from API
+        axios.get('https://myflix-20210211.herokuapp.com/movies/')
+    
+        // Then bring in the response from server
+          .then(
+            response => {
+              // Assign result to the state
+              this.setState({
+                movies: response.data
+              });
+            }
+          )
+          // Handle error
+          .catch(
+            (error) => {
+            console.log(error);
           });
-        }
-      )
-      // Handle error
-      .catch(
-        (error) => {
-        console.log(error);
-      });
-  }
+      }
 
-  // When movie is clicked, take in 'the movie data'
-  onMovieClick(movie){
-
-    // setState for selectedMovie
+  onMovieClick(movie) {
     this.setState({
       selectedMovie: movie
     });
   }
 
-  // Render the component 
-  render(){
 
-    // If state is NOT initialised, error will be thrown on runtime before data is initially loaded
-    const {
-      movies,
-      selectedMovie
-    } = this.state;
+  render() {
+    const { movies, selectedMovie } = this.state;
 
-    // If movies are NOT found, return this 
-    if(!movies){
-      return <div className="main-view"></div>;
-    }
+    // Before the movies have been loaded
+    if (!movies) return <div className="main-view"/>;
 
-    // Return the component
-    return(
-      <div className="main-view">
-        {
-          // If movie is selected, return <MovieView/>
-          selectedMovie ?
-          <MovieView
+    return (
+    //  <div className="main-view">
+    //   {selectedMovie
+    //      ? <MovieView
+    //         movie={selectedMovie}
+    //       />
+    //      : movies.map(movie => (
+    //        <MovieCard 
+    //         key={movie._id} 
+    //         movie={movie} 
+    //         onClick={
+    //           movie => this.onMovieClick(movie)
+    //         }
+    //        />
+    //      ))
+    //   }
+    //  </div>
+     
+     <div className="main-view">
+      {selectedMovie
+         ? <MovieView2
             movie={selectedMovie}
           />
-          // Otherwise, return a list of <MovieCard/>
-          :
-          movies.map(
-            movie => (
-              <MovieCard 
-                className="movie-card" 
-
-                // Use movie._id as a unique key for each <MovieCard/>
-                key={movie._id}
-
-                // Pass 'movie data' as prop to each <MovieCard/>
-                movie={movie}
-
-                // When clicked,pass 'the movie data' to this function
-                onClick={
-                  movie => this.onMovieClick(movie)
-                }
-              />
-            )
-          )
-        }
-      </div>
+         : movies.map(movie => (
+           <MovieCard 
+            key={movie._id} 
+            movie={movie} 
+            onClick={
+              movie => this.onMovieClick(movie)
+            }
+           />
+         ))
+      }
+     </div>
     );
   }
 }
+
