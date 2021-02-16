@@ -1,6 +1,6 @@
 import React from 'react';
 
-export class MovieView extends React.Component{
+export class MovieView2 extends React.Component{
 
   constructor(){
     super();
