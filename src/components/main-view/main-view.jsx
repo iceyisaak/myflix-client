@@ -53,6 +53,17 @@ export class MainView extends React.Component {
   }
 
 
+  // Function: Go back to <MainView/>
+  onBackClick(){
+
+    // setState of 'selectedMovie' back to 'null'
+    this.setState({
+      selectedMovie: null
+    });
+  }
+
+
+  // Render the component
   render() {
 
     // Destructure the states
@@ -70,7 +81,12 @@ export class MainView extends React.Component {
       // If a movie is selected, Return that selected <MovieView/>
       selectedMovie ?
         <MovieView
+
+          // send 'selectedMovie state'  as 'movie prop'
           movie={selectedMovie}
+
+          // send 'a function that returns this.onBackClick()' as the 'onClick prop'
+          onClick={() => this.onBackClick()}
         />
 
         //Else 

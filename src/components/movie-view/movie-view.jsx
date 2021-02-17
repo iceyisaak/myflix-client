@@ -9,7 +9,11 @@ export class MovieView extends React.Component{
 
   render(){
 
-    const {movie} = this.props;
+    // Take in the props
+    const {
+      movie,
+      onClick
+    } = this.props;
 
     if(!movie) {
       return null;
@@ -55,7 +59,10 @@ export class MovieView extends React.Component{
              {movie.Director.Name}
            </span>
          </div>
-         <button onClick={() => location.reload()}>
+         <button 
+          // When clicked, the onClick() method of <MainView/> is called
+          onClick={() => onClick()}
+         >
            Back
          </button>
       </div>

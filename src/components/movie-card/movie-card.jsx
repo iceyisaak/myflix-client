@@ -12,10 +12,10 @@ export class MovieCard extends React.Component{
 
     return (
       <div 
-      className="movie-card"
+        className="movie-card"
 
-      // When clicked, method of <MainView/> is called
-      onClick={()=> onClick(movie)}
+        // When clicked, method of <MainView/> is called
+        onClick={()=> onClick(movie)}
       >
         {movie.Title}
       </div>
