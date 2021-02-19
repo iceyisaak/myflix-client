@@ -7,6 +7,7 @@ import Col from 'react-bootstrap/Col';
 import { MovieCard } from '../movie-card/movie-card';
 import { MovieView } from '../movie-view/movie-view';
 import { LoginView } from '../login-view/login-view';
+import { RegistrationView } from '../registration-view/registration-view';
 
 
 export class MainView extends React.Component {
@@ -21,7 +22,8 @@ export class MainView extends React.Component {
     this.state = {
       movies: null,
       selectedMovie: null,
-      user: null
+      user: null,
+      registration:null
     };
   }
 
@@ -75,6 +77,15 @@ export class MainView extends React.Component {
     });
   }
 
+
+  // // Function: register, takes in data
+  // onRegister(user){
+
+  //   this.setState({
+  //     user
+  //   })
+  // }
+
   // Render the component
   render() {
 
@@ -82,17 +93,36 @@ export class MainView extends React.Component {
     const { 
       movies,
       selectedMovie,
+      registration,
       user
       } = this.state;
+
+    
+
+ 
+  
+
 
     // If user is NOT logged in, return <LoginView/>
     if(!user) {
       return (
+        
+          registration ?
+        
         <LoginView 
           onLoggedIn={
             (user) => {this.onLoggedIn(user)}
           }
         />
+
+        :
+
+        <RegistrationView
+          onRegister={
+            (user)=>{this.onRegister(user)}
+          }
+        />
+        
       );
     }
     
@@ -129,11 +159,14 @@ export class MainView extends React.Component {
           // Return a list of <MovieCard/>
             
           movies.map(movie => (
-            <Col md={3}>
+            <Col 
+            md={3}
+            // Assign a unique key to each <MovieCard/> using 'movie._id'  
+            key={movie._id} 
+            >
             <MovieCard 
 
-              // Assign a unique key to each <MovieCard/> using 'movie._id'  
-              key={movie._id} 
+              
 
               // Pass the 'movie data' as prop to each <MovieCard/>
               movie={movie} 

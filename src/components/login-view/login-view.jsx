@@ -59,9 +59,13 @@ export function LoginView(props){
         type="submit"
         onClick={handleSubmit}
         >
-        Submit
+        Login
       </Button>
     </Form>
+
+    
+
+    
 
   );
 }
