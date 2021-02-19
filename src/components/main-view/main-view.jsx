@@ -78,13 +78,13 @@ export class MainView extends React.Component {
   }
 
 
-  // // Function: register, takes in data
-  // onRegister(user){
+  // Function: register, takes in data
+  onRegister(user){
 
-  //   this.setState({
-  //     user
-  //   })
-  // }
+    this.setState({
+      user
+    })
+  }
 
   // Render the component
   render() {
