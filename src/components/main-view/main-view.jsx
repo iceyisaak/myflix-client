@@ -107,7 +107,9 @@ export class MainView extends React.Component {
     if(!user) {
       return (
         
-          registration ?
+ 
+
+        //   registration ?
         
         <LoginView 
           onLoggedIn={
@@ -115,13 +117,13 @@ export class MainView extends React.Component {
           }
         />
 
-        :
+        // :
 
-        <RegistrationView
-          onRegister={
-            (user)=>{this.onRegister(user)}
-          }
-        />
+        // <RegistrationView
+        //   onRegister={
+        //     (user)=>{this.onRegister(user)}
+        //   }
+        // />
         
       );
     }
@@ -145,14 +147,14 @@ export class MainView extends React.Component {
           // If a movie is selected, Return that selected <MovieView/>
           selectedMovie ?
             <Col md={8}>
-            <MovieView
+              <MovieView
 
-              // send 'selectedMovie state'  as 'movie prop'
-              movie={selectedMovie}
+                // send 'selectedMovie state'  as 'movie prop'
+                movie={selectedMovie}
 
-              // send 'a function that returns this.onBackClick()' as the 'onClick prop'
-              onClick={() => this.onBackClick()}
-              />
+                // send 'a function that returns this.onBackClick()' as the 'onClick prop'
+                onClick={() => this.onBackClick()}
+                />
             </Col>
             //Else 
           :
@@ -164,18 +166,18 @@ export class MainView extends React.Component {
             // Assign a unique key to each <MovieCard/> using 'movie._id'  
             key={movie._id} 
             >
-            <MovieCard 
+              <MovieCard 
 
-              
+                
 
-              // Pass the 'movie data' as prop to each <MovieCard/>
-              movie={movie} 
+                // Pass the 'movie data' as prop to each <MovieCard/>
+                movie={movie} 
 
-              // When <MovieCard/> is clicked, pass that 'movie data' to this function
-              onClick={
-                movie => this.onMovieClick(movie)
-              }
-            />
+                // When <MovieCard/> is clicked, pass that 'movie data' to this function
+                onClick={
+                  movie => this.onMovieClick(movie)
+                }
+              />
             </Col>
           ))
                         

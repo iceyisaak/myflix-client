@@ -1,8 +1,11 @@
 import React, {useState} from 'react';
+import PropTypes from 'prop-types';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 
-export function LoginView(props){
+export function LoginView({
+  onLoggedIn
+}){
 
   // set the state
   const [username,setUsername] = useState('');
@@ -20,7 +23,7 @@ export function LoginView(props){
     // authenticateUser();
 
     // Send 'username' to onLoggedIn()
-    props.onLoggedIn(username);
+    onLoggedIn(username);
 
   }
   
@@ -29,7 +32,11 @@ export function LoginView(props){
     <Form>
       <Form.Group controlId="formUsername">
 
-        <Form.Label>
+        <h1 className="h1">
+          Welcome Back!
+        </h1>
+
+        <Form.Label className="text-base">
           Username:
         </Form.Label>
         <Form.Control 
@@ -43,7 +50,7 @@ export function LoginView(props){
 
       <Form.Group controlId="formPassword">
 
-        <Form.Label>
+        <Form.Label className="text-base">
           Password:
         </Form.Label>
         <Form.Control 
@@ -61,11 +68,28 @@ export function LoginView(props){
         >
         Login
       </Button>
+      <Form.Group className="text-xs text-center mt-4">
+       
+       <span>
+         Not yet a member?
+       </span>
+
+      <Button
+        variant="link"
+        className="text-xs"
+        >
+        Register Now
+      </Button>
+      </Form.Group>
     </Form>
 
-    
-
-    
 
   );
 }
+
+
+LoginView.propTypes = {
+
+  onLoggedIn: PropTypes.func.isRequired
+
+};

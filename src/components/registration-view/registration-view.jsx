@@ -6,7 +6,8 @@ export function RegistrationView (props) {
 
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
+  const [email, setEmail] = useState('');
+  const [birthday, setBirthday] = useState('');
 
   const handleSubmit = (e) => {
 
@@ -17,7 +18,7 @@ export function RegistrationView (props) {
       confirmPassword
     );
 
-    props.onRegister(username);
+    props.onLoggedIn(username);
   }
 
   const handleSwitch = (e) => {
@@ -28,11 +29,11 @@ export function RegistrationView (props) {
   return(
 
     <Form>
-      <h4>
-        Registration Form
-      </h4>
       <Form.Group controlId="formUsername">
-        <Form.Label>
+      <h1 className="h1">
+        Registration Form
+      </h1>
+        <Form.Label className="text-base">
           Username:
         </Form.Label>
         <Form.Control
@@ -47,7 +48,7 @@ export function RegistrationView (props) {
       </Form.Group>
 
       <Form.Group controlId="formPassword">
-          <Form.Label>
+          <Form.Label className="text-base">
             Password:
           </Form.Label>
           <Form.Control
@@ -60,20 +61,38 @@ export function RegistrationView (props) {
             }
           />
       </Form.Group>
-      <Form.Group controlId="formConfirmPassword">
-          <Form.Label>
-            Confirm Password:
+
+      <Form.Group controlId="formEmail">
+          <Form.Label className="text-base">
+            Email:
           </Form.Label>
           <Form.Control
-            type="password"
-            value={confirmPassword}
+            type="email"
+            value={email}
             onChange={
               (e) => {
-                setConfirmPassword(e.target.value)
+                setEmail(e.target.value)
               }
             }
           />
       </Form.Group>
+
+      <Form.Group controlId="formBirthday">
+
+        <Form.Label className="text-base">
+          Birthday:
+        </Form.Label>
+        <Form.Control
+          type="date"
+          value={birthday}
+          onChange={
+            (e) => {
+              setBirthday(e.target.value)
+            }
+          }
+        />
+      </Form.Group>
+
       <Button
         variant="primary"
         type="submit"
@@ -82,16 +101,20 @@ export function RegistrationView (props) {
         Register
       </Button>
 
-      Already have an account?
-      <Button
-        variant="link"
-        onClick={handleSwitch}
-      >
-        Login
-      </Button>
+      <Form.Group className="text-xs text-center mt-4">
+        <span>
+          Already have an account?
+        </span>
+        <Button
+          variant="link"
+          onClick={handleSwitch}
+          >
+          Login
+        </Button>
+      </Form.Group>
+    
+    
     </Form>
-    
-    
   )
 
   

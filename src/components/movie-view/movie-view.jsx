@@ -1,4 +1,10 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
+import Image from 'react-bootstrap/Image'
+import Button from 'react-bootstrap/Button';
+
+import './movie-view.scss';
 
 export class MovieView extends React.Component{
 
@@ -22,7 +28,7 @@ export class MovieView extends React.Component{
     return (
 
       <div className="movie-view">
-        <img 
+        <Image 
          className="movie-poster"
          src={movie.ImagePath}
          alt="Movie Poster" 
@@ -59,14 +65,27 @@ export class MovieView extends React.Component{
              {movie.Director.Name}
            </span>
          </div>
-         <button 
+         <Button 
           // When clicked, the onClick() method of <MainView/> is called
           onClick={() => onClick()}
+          variant="light"
          >
            Back
-         </button>
+         </Button>
       </div>
     );
   }
+
+}
+
+MovieView.propTypes = {
+
+  movie: PropTypes.shape({
+    Title: PropTypes.string.isRequired,
+    Description: PropTypes.string.isRequired,
+    ImagePath: PropTypes.string.isRequired
+  }).isRequired,
+
+  onClick: PropTypes.func.isRequired
 
 }

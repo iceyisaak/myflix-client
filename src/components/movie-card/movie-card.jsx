@@ -14,7 +14,10 @@ export class MovieCard extends React.Component{
     } = this.props;
 
     return (
-      <Card>
+      <Card 
+      onClick={()=>onClick(movie)}
+      className="card"
+      >
         <Card.Img
           variant="top"
           src={movie.ImagePath}

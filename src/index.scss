@@ -1,5 +1,33 @@
 $color: steelblue;
 
+* {
+  border: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-size: 62.5%;
+}
+
 .my-flix {
   color: $color;
+}
+
+.h1 {
+  font-size: 4rem;
+}
+
+.text-base {
+  font-size: 1.6rem;
+}
+
+.text-xs {
+  font-size: 1rem;
+}
+
+.card {
+  &:hover {
+    cursor: pointer;
+  }
 }
