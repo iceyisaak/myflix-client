@@ -1,7 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+
+
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
+import Badge from 'react-bootstrap/Badge';
 
 export class MovieCard extends React.Component{
 
@@ -26,14 +29,19 @@ export class MovieCard extends React.Component{
         <Card.Title>
           {movie.Title}
         </Card.Title>
-        <Card.Text>
-          {movie.Description}
-        </Card.Text>  
+        <Badge 
+        className="text-xs"
+        variant="secondary"
+        >
+          {movie.Genre.Name}
+        </Badge>  
           <Button 
             onClick={()=>onClick(movie)}
             variant="link"
+            size="lg"
+            block
             >
-            Open
+            See Details
           </Button>
         </Card.Body>
       </Card>

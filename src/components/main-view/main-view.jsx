@@ -142,11 +142,17 @@ export class MainView extends React.Component {
     // Return the component
     return (
 
+      
+
+
      <Row className="main-view justify-content-md-center">
         {
           // If a movie is selected, Return that selected <MovieView/>
           selectedMovie ?
-            <Col md={8}>
+            <Col 
+            md={8}
+            className="mb-5"
+            >
               <MovieView
 
                 // send 'selectedMovie state'  as 'movie prop'
@@ -162,9 +168,10 @@ export class MainView extends React.Component {
             
           movies.map(movie => (
             <Col 
-            md={3}
-            // Assign a unique key to each <MovieCard/> using 'movie._id'  
-            key={movie._id} 
+              md={3}
+              // Assign a unique key to each <MovieCard/> using 'movie._id'  
+              key={movie._id} 
+              className="my-5"
             >
               <MovieCard 
 
@@ -177,13 +184,13 @@ export class MainView extends React.Component {
                 onClick={
                   movie => this.onMovieClick(movie)
                 }
+                
               />
             </Col>
           ))
                         
         }
      </Row>
-     
     );
   }
 }

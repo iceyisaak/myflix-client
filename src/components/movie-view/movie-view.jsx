@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 import Image from 'react-bootstrap/Image'
 import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
 
 import './movie-view.scss';
 
@@ -27,52 +28,54 @@ export class MovieView extends React.Component{
 
     return (
 
-      <div className="movie-view">
+      <Form className="movie-view ">
+        <h2 className="h2">
+          {movie.Title}
+        </h2>
         <Image 
-         className="movie-poster"
+         className="movie-poster mb-3"
          src={movie.ImagePath}
          alt="Movie Poster" 
          />
-         <div className="movie-title">
-           <span className="label">
-             Title: 
-           </span>
-           <span className="value">
-             {movie.Title}
-           </span>
-         </div>
-         <div className="movie-description">
-           <span className="label">
-             Description:
-           </span>
-           <span className="value">
-             {movie.Description}
-           </span>
-         </div>
-         <div className="movie-genre">
-           <span className="label">
-             Genre: 
-           </span>
-           <span className="value">
-             {movie.Genre.Name}
-           </span>
-         </div>
-         <div className="movie-director">
-           <span className="label">
-             Director:
-           </span>
-           <span className="value">
-             {movie.Director.Name}
-           </span>
-         </div>
+         <Form.Group controlId="formDescription">
+
+         <Form.Label className="text-base font-weight-bold">
+           Description:
+         </Form.Label>
+         <Form.Text className="text-base">
+           {movie.Description}
+         </Form.Text>
+         </Form.Group>
+
+        <Form.Group controlId="formGenre">
+          <Form.Label className="text-base font-weight-bold">
+            Genre:
+          </Form.Label>
+          <Form.Text className="text-base">
+            {movie.Genre.Name}
+          </Form.Text>
+        </Form.Group>
+
+        <Form.Group controlId="formDirector">
+          <Form.Label className="text-base font-weight-bold">
+            Director:
+          </Form.Label>
+          <Form.Text className="text-base">
+            {movie.Director.Name}
+          </Form.Text>
+        </Form.Group>
+
          <Button 
           // When clicked, the onClick() method of <MainView/> is called
           onClick={() => onClick()}
           variant="light"
+          className="mt-3"
+          size="lg"
          >
            Back
          </Button>
-      </div>
+
+      </Form>
     );
   }
 

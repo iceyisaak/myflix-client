@@ -6,6 +6,7 @@ import Container from 'react-bootstrap/Container';
 import {MainView} from './components/main-view/main-view';
 import Navigation from './components/Navigation/Navigation';
 
+
 // Import scss file (and bundle it too)
 import './index.scss';
 
@@ -15,10 +16,10 @@ class MyFlixApp extends React.Component{
   render() {
     return (
       <React.Fragment>
-      <Navigation/>
-      <Container>
-       <MainView/>
-      </Container>
+        <Navigation/>
+        <Container>
+          <MainView/>
+        </Container>
       </React.Fragment>
     );
   }
