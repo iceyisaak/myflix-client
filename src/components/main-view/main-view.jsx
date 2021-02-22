@@ -28,7 +28,17 @@ export class MainView extends React.Component {
   }
 
   // When Component is mounted to the DOM
-  componentDidMount(){
+  componentDidMount(){  
+
+    // let accessToken = localStorage.getItem('token');
+
+    // if(token !== null){
+    //   this.setState({
+    //     user: localStorage.getItem('user')
+    //   });
+    //   this.getMovies(accessToken);
+    // }
+    
 
         // Get Data from API
         axios.get('https://myflix-20210211.herokuapp.com/movies/')
@@ -68,13 +78,23 @@ export class MainView extends React.Component {
     });
   }
 
-  // Function: log in, takes in 'user data'
-  onLoggedIn(user){
+  // Function: log in, takes in 'authData'
+  onLoggedIn(authData){
 
-    // setState of 'user' to the 'user data'
+    // Log the value of `authData`
+    console.log(authData);
+    
+    // setState of 'user' to the value of 'authData', assigning it to the Username
     this.setState({
-      user
+      user: authData.user.Username
     });
+
+    // setItem 'token' and 'user' in the localStorage
+    localStorage.setItem('token', authData.token);
+    localStorage.setItem('user', authData.user.Username);
+
+    // Send 'authData.token' to .getMovies()
+    this.getMovies(authData.token);
   }
 
 
@@ -84,6 +104,45 @@ export class MainView extends React.Component {
     this.setState({
       user
     })
+  }
+
+
+  // .getMovie() takes in token
+  getMovies(token){
+
+    // Fetch data from the Server side
+    axios
+      .get(
+        'https://myflix-20210211.herokuapp.com/movies',
+        {
+          // Specify the headers - Authorization: Bearer Token
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        }
+      )
+
+      // Then, 
+      .then(
+
+        // take in 'response' data
+        (response) => {
+
+          // setState of 'movies' to be 'response.data'
+          this.setState({
+            movies: response.data
+          });
+        }
+      )
+
+      // Catch errors
+      .catch(
+        (err) => {
+
+          // Log errors in the console
+          console.log(err);
+        }
+      );
   }
 
   // Render the component

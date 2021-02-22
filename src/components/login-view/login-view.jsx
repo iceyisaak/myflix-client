@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import PropTypes from 'prop-types';
+import axios from 'axios';
 
 
 import Form from 'react-bootstrap/Form';
@@ -19,15 +20,29 @@ export function LoginView({
     // Prevent page refresh
     e.preventDefault();
 
-    // Testing Data Value
-    console.log(username, password);
+    // Sends a request to the server for authentication
+    axios.post(
+        'https://myflix-20210211.herokuapp.com/login',
+        {
+          Username: username,
+          Password: password
+        }
+      )
+      .then(
+        (response) => {
+          const data = response.data;
+          // Send 'username' to onLoggedIn()
+          onLoggedIn(data);
+        }
+      )
+      .catch(
+        (err) => {
+          console.log('User not found.')
+        }
+      );
 
-    // authenticateUser();
-
-    // Send 'username' to onLoggedIn()
-    onLoggedIn(username);
-
-  }
+  };
+  
   
   return(
 
