@@ -21,7 +21,7 @@ export class MainView extends React.Component {
 
     // Initialse the states for this component
     this.state = {
-      movies: null,
+      movies: [],
       user: null,
     };
   }
@@ -29,16 +29,16 @@ export class MainView extends React.Component {
   // When Component is mounted to the DOM
   componentDidMount(){  
 
-    // Define 'accessToken' as a way to getItem('token') in localStorage
+    // Define 'accessToken' as a way to getItem('token') from localStorage
     let accessToken = localStorage.getItem('token');
 
     // If token has a value
     if(accessToken !== null){
 
       // setState
-      // set 'user' state to .getItem('user') in localStorage
       this.setState({
 
+        // set 'user' state to .getItem('user') from localStorage
         user: localStorage.getItem('user')
       });
 
@@ -74,18 +74,11 @@ export class MainView extends React.Component {
       user: null
     });
 
+    // Remove token & user from localStorage
     localStorage.removeItem('token');
     localStorage.removeItem('user');
   }
 
-
-  // Function: register, takes in data
-  onRegister(user){
-
-    this.setState({
-      user
-    })
-  }
 
 
   // .getMovie() takes in token
@@ -96,7 +89,7 @@ export class MainView extends React.Component {
       .get(
         'https://myflix-20210211.herokuapp.com/movies',
         {
-          // Specify the headers - Authorization: Bearer Token
+          // Specify the headers, set Authorization: Bearer Token
           headers: {
             Authorization: `Bearer ${token}`
           }
@@ -109,7 +102,7 @@ export class MainView extends React.Component {
         // take in 'response' data
         (response) => {
 
-          // setState of 'movies' to be 'response.data'
+          // setState of 'movies' to be 'response.data' from API
           this.setState({
             movies: response.data
           });
@@ -138,28 +131,6 @@ export class MainView extends React.Component {
       } = this.state;
 
 
-    // If user is NOT logged in, return <LoginView/>
-    if(!user) {
-      return (
-        
-        <LoginView 
-          onLoggedIn={
-            (user) => {this.onLoggedIn(user)}
-          }
-        />
-
-        // : 
-
-        // <RegistrationView
-        //   onRegister={
-        //     (user)=>{this.onRegister(user)}
-        //   }
-        // />
-        
-      );
-    }
-    
-
     // Before the movies have been loaded
 
     // If movies are NOT found, return this
@@ -172,24 +143,47 @@ export class MainView extends React.Component {
 
     // Return the component
     return (
+      
       <Router>
         <Row className="main-view justify-content-md-center">
           <Route
             exact path="/"
             render={
               () => {
-                movies.map(
-                  (movie) => {
-                    <Col md={3} key={movie._id}>
-                      <MovieCard movie={movie}/>
-                    </Col>
-                  }
-              )
-            }
+                  // If user is NOT logged in, return <LoginView/>
+                if(!user) {
+                  return (
+                    
+                    <LoginView 
+                      onLoggedIn={
+                        (user) => {this.onLoggedIn(user)}
+                      }
+                    />
+                  );
+                }
+                  movies.map(
+                    (movie) => {
+                      <Col md={3} key={movie._id}>
+                        <MovieCard 
+                          key={movie._id} 
+                          movie={movie}
+                        />
+                      </Col>
+                    }
+                )
+              }
             }
           />
           <Route
-            path="movies/:movieId"
+            exact path="/register"
+            render={
+              () => {
+                <RegistrationView/>
+              }
+            }
+          />
+          <Route
+            exact path="movies/:movieId"
             render={
               ({match})=> {
                 <Col

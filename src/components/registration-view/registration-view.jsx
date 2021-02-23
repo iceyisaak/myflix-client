@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
+import axios from 'axios';
 
 export function RegistrationView (props) {
 
@@ -11,21 +12,38 @@ export function RegistrationView (props) {
   const [email, setEmail] = useState('');
   const [birthday, setBirthday] = useState('');
 
-  const handleSubmit = (e) => {
 
+  const handleRegister = (e) => {
+
+    // prevent page refresh
     e.preventDefault();
-    console.log(
-      username,
-      password,
-      confirmPassword
+
+    axios
+    .post(
+      'https://myflix-20210211.herokuapp.com/users',
+      {
+        Username: username,
+        Password: password,
+        Email: email,
+        Birthday: birthday
+      }
+    )
+    .then(
+      (response) => {
+        const data = response.data;
+        console.log(data);
+        window.open(
+          '/',
+          '_self'
+        );
+      }
+    )
+    .catch(
+      (err) => {
+        console.log('Error, cannot register user.')
+      }
     );
 
-    props.onLoggedIn(username);
-  }
-
-  const handleSwitch = (e) => {
-
-    props.onRegistration(registration)
   }
 
   return(
@@ -98,7 +116,7 @@ export function RegistrationView (props) {
       <Button
         variant="primary"
         type="submit"
-        onClick={handleSubmit}
+        onClick={handleRegister}
       >
         Register
       </Button>
