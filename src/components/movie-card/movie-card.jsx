@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
+import {Link} from 'react-router-dom';
 
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
@@ -12,13 +12,11 @@ export class MovieCard extends React.Component{
 
     // <MovieCard/> takes in the props from <MainView/>
     const {
-      movie,
-      onClick
+      movie
     } = this.props;
 
     return (
       <Card 
-      onClick={()=>onClick(movie)}
       className="card"
       >
         <Card.Img
@@ -35,14 +33,17 @@ export class MovieCard extends React.Component{
         >
           {movie.Genre.Name}
         </Badge>  
-          <Button 
-            onClick={()=>onClick(movie)}
-            variant="link"
-            size="lg"
-            block
-            >
-            See Details
-          </Button>
+        <Link
+          to={`/movies/${movie._id}`}
+        >
+            <Button 
+              variant="link"
+              size="lg"
+              block
+              >
+              See Details
+            </Button>
+          </Link>
         </Card.Body>
       </Card>
     );
@@ -73,10 +74,7 @@ MovieCard.propTypes = {
 
   })
   // This prop is required
-  .isRequired,
-
-  // 'prop onClick' is a function. It's required.
-  onClick: PropTypes.func.isRequired
+  .isRequired
 
 };
 

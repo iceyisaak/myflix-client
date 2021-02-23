@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {Link} from 'react-router-dom';
 
 import Image from 'react-bootstrap/Image'
 import Button from 'react-bootstrap/Button';
@@ -52,7 +53,11 @@ export class MovieView extends React.Component{
             Genre:
           </Form.Label>
           <Form.Text className="text-base">
-            {movie.Genre.Name}
+            <Link
+              to={`/genres/${movie.Genre.Name}`}
+            >
+              {movie.Genre.Name}
+            </Link>
           </Form.Text>
         </Form.Group>
 
@@ -61,7 +66,11 @@ export class MovieView extends React.Component{
             Director:
           </Form.Label>
           <Form.Text className="text-base">
+            <Link 
+              to={`/directors/${movie.Director.Name}`}
+            >
             {movie.Director.Name}
+            </Link>
           </Form.Text>
         </Form.Group>
 

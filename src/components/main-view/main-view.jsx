@@ -1,4 +1,5 @@
 import React from 'react';
+import {BrowserRouter as Router, Route} from 'react-router-dom';
 import axios from 'axios';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -21,62 +22,31 @@ export class MainView extends React.Component {
     // Initialse the states for this component
     this.state = {
       movies: null,
-      selectedMovie: null,
       user: null,
-      registration:null
     };
   }
 
   // When Component is mounted to the DOM
   componentDidMount(){  
 
-    // let accessToken = localStorage.getItem('token');
+    // Define 'accessToken' as a way to getItem('token') in localStorage
+    let accessToken = localStorage.getItem('token');
 
-    // if(token !== null){
-    //   this.setState({
-    //     user: localStorage.getItem('user')
-    //   });
-    //   this.getMovies(accessToken);
-    // }
-    
+    // If token has a value
+    if(accessToken !== null){
 
-        // Get Data from API
-        axios.get('https://myflix-20210211.herokuapp.com/movies/')
-    
-        // Then bring in the response from server
-          .then(
-            response => {
-              // Assign result to the state
-              this.setState({
-                movies: response.data
-              });
-            }
-          )
-          // Handle error
-          .catch(
-            (error) => {
-            console.log(error);
-          });
-      }
+      // setState
+      // set 'user' state to .getItem('user') in localStorage
+      this.setState({
 
-  // Function to Select Movie: Take in the 'movie data'
-  onMovieClick(movie) {
+        user: localStorage.getItem('user')
+      });
 
-    // Set selectedMovie to that 'movie data'
-    this.setState({
-      selectedMovie: movie
-    });
+      // Pass accessToken to getMovies()
+      this.getMovies(accessToken);
+    }
   }
 
-
-  // Function: Go back to <MainView/>
-  onBackClick(){
-
-    // setState of 'selectedMovie' back to 'null'
-    this.setState({
-      selectedMovie: null
-    });
-  }
 
   // Function: log in, takes in 'authData'
   onLoggedIn(authData){
@@ -95,6 +65,17 @@ export class MainView extends React.Component {
 
     // Send 'authData.token' to .getMovies()
     this.getMovies(authData.token);
+  }
+
+  // When user logs out
+  onLoggedOut(){
+
+    this.setState({
+      user: null
+    });
+
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
   }
 
 
@@ -156,19 +137,10 @@ export class MainView extends React.Component {
       user
       } = this.state;
 
-    
-
- 
-  
-
 
     // If user is NOT logged in, return <LoginView/>
     if(!user) {
       return (
-        
- 
-
-        //   registration ?
         
         <LoginView 
           onLoggedIn={
@@ -176,7 +148,7 @@ export class MainView extends React.Component {
           }
         />
 
-        // :
+        // : 
 
         // <RegistrationView
         //   onRegister={
@@ -200,56 +172,45 @@ export class MainView extends React.Component {
 
     // Return the component
     return (
-
-      
-
-
-     <Row className="main-view justify-content-md-center">
-        {
-          // If a movie is selected, Return that selected <MovieView/>
-          selectedMovie ?
-            <Col 
-            md={8}
-            className="mb-5"
-            >
-              <MovieView
-
-                // send 'selectedMovie state'  as 'movie prop'
-                movie={selectedMovie}
-
-                // send 'a function that returns this.onBackClick()' as the 'onClick prop'
-                onClick={() => this.onBackClick()}
-                />
-            </Col>
-            //Else 
-          :
-          // Return a list of <MovieCard/>
-            
-          movies.map(movie => (
-            <Col 
-              md={3}
-              // Assign a unique key to each <MovieCard/> using 'movie._id'  
-              key={movie._id} 
-              className="my-5"
-            >
-              <MovieCard 
-
-                
-
-                // Pass the 'movie data' as prop to each <MovieCard/>
-                movie={movie} 
-
-                // When <MovieCard/> is clicked, pass that 'movie data' to this function
-                onClick={
-                  movie => this.onMovieClick(movie)
-                }
-                
-              />
-            </Col>
-          ))
-                        
-        }
-     </Row>
+      <Router>
+        <Row className="main-view justify-content-md-center">
+          <Route
+            exact path="/"
+            render={
+              () => {
+                movies.map(
+                  (movie) => {
+                    <Col md={3} key={movie._id}>
+                      <MovieCard movie={movie}/>
+                    </Col>
+                  }
+              )
+            }
+            }
+          />
+          <Route
+            path="movies/:movieId"
+            render={
+              ({match})=> {
+                <Col
+                  md={8}
+                  className="mb-5"
+                >
+                  <MovieView
+                    movie={
+                      movies.find(
+                          (movie) => {
+                            movie._id === match.params.movieId
+                          }
+                        )
+                      }
+                  />
+                </Col>
+              }
+            }
+          />   
+      </Row>
+     </Router>
     );
   }
 }
