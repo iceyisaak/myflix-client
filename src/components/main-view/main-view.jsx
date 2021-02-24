@@ -132,11 +132,7 @@ export class MainView extends React.Component {
     // Before the movies have been loaded
 
     // If movies are NOT found, return this
-    if (!movies){
-      return (
-      <div className="main-view"/>
-      );
-    } 
+    if (!movies) return <div className="main-view"/> 
 
 
     // Return the component
@@ -181,28 +177,25 @@ export class MainView extends React.Component {
           <Route
             path="/register"
             render={
-              () => {
-                <RegistrationView/>
-              }
+              () => <RegistrationView/>
             }
           />
+
           <Route
             exact path="movies/:movieId"
             render={
-              ({match})=> 
-                <Col
-                  md={8}
-                  className="mb-5"
-                >
-                  <MovieView
-                    movie={
-                      movies.find(
-                        (movie) => movie._id === match.params.movieId
-                      )
-                    }
-                  />
-                </Col>
-              
+              ({match}) => <Col
+                            md={8}
+                            className="mb-5"
+                            >
+                              <MovieView
+                                movie={
+                                  movies.find(
+                                    (movie) => movie._id === match.params.movieId
+                                  )
+                                }
+                              />
+                            </Col>
             }
           />   
       </Row>
