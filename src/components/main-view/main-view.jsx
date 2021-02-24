@@ -151,7 +151,7 @@ export class MainView extends React.Component {
                     
                     <LoginView 
                       onLoggedIn={
-                        (user) => {this.onLoggedIn(user)}
+                        (user) => this.onLoggedIn(user)
                       }
                     />
                   );
