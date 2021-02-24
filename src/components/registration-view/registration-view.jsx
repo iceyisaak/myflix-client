@@ -19,30 +19,30 @@ export function RegistrationView (props) {
     e.preventDefault();
 
     axios
-    .post(
-      'https://myflix-20210211.herokuapp.com/users',
-      {
-        Username: username,
-        Password: password,
-        Email: email,
-        Birthday: birthday
-      }
-    )
-    .then(
-      (response) => {
-        const data = response.data;
-        console.log(data);
-        window.open(
-          '/',
-          '_self'
-        );
-      }
-    )
-    .catch(
-      (err) => {
-        console.log('Error, cannot register user.')
-      }
-    );
+      .post(
+        'https://myflix-20210211.herokuapp.com/users',
+        {
+          Username: username,
+          Password: password,
+          Email: email,
+          Birthday: birthday
+        }
+      )
+      .then(
+        (response) => {
+          const data = response.data;
+          console.log(data);
+          window.open(
+            '/',
+            '_self'
+          );
+        }
+      )
+      .catch(
+        (err) => {
+          console.log('Error, cannot register user.')
+        }
+      );
 
   }
 
@@ -138,10 +138,4 @@ export function RegistrationView (props) {
   )
 
   
-}
-
-RegistrationView.propTypes ={
-
-  onRegister: PropTypes.func.isRequired
-
 }

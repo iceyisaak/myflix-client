@@ -6,6 +6,8 @@ import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import Badge from 'react-bootstrap/Badge';
 
+import './movie-card.scss';
+
 export class MovieCard extends React.Component{
 
   render(){
@@ -17,34 +19,38 @@ export class MovieCard extends React.Component{
 
     return (
       <Card 
-      className="card"
-      >
-        <Card.Img
-          variant="top"
-          src={movie.ImagePath}
-        />
-        <Card.Body>
-        <Card.Title>
-          {movie.Title}
-        </Card.Title>
-        <Badge 
-        className="text-xs"
-        variant="secondary"
+        className="card"
         >
-          {movie.Genre.Name}
-        </Badge>  
-        <Link
-          to={`/movies/${movie._id}`}
-        >
-            <Button 
-              variant="link"
-              size="lg"
-              block
+          <Link
+            to={`/movies/${movie._id}`}
+          >
+              <Card.Img
+                variant="top"
+                src={movie.ImagePath}
+              />
+              <Card.Body>
+              <Card.Title>
+                {movie.Title}
+              </Card.Title>
+              <Badge 
+                className="text-xs"
+                variant="secondary"
               >
-              See Details
-            </Button>
+                {movie.Genre.Name}
+              </Badge>  
+              {/* <Link
+                to={`/movies/${movie._id}`}
+                > */}
+                  <Button 
+                    variant="link"
+                    size="lg"
+                    block
+                    >
+                    See Details
+                  </Button>
+                {/* </Link> */}
+              </Card.Body>
           </Link>
-        </Card.Body>
       </Card>
     );
 

@@ -125,8 +125,6 @@ export class MainView extends React.Component {
     // Destructure the states
     const { 
       movies,
-      selectedMovie,
-      registration,
       user
       } = this.state;
 
@@ -143,12 +141,13 @@ export class MainView extends React.Component {
 
     // Return the component
     return (
-      
+
       <Router>
         <Row className="main-view justify-content-md-center">
           <Route
             exact path="/"
             render={
+
               () => {
                   // If user is NOT logged in, return <LoginView/>
                 if(!user) {
@@ -161,21 +160,26 @@ export class MainView extends React.Component {
                     />
                   );
                 }
-                  movies.map(
-                    (movie) => {
-                      <Col md={3} key={movie._id}>
-                        <MovieCard 
-                          key={movie._id} 
-                          movie={movie}
-                        />
-                      </Col>
-                    }
-                )
+                  return (
+                    movies.map(
+                      (movie) => 
+                        <Col 
+                          md={3} 
+                          key={movie._id}
+                        >
+                          <MovieCard 
+                            movie={movie}
+                          />
+                        </Col>
+                      
+                    )
+                  )
               }
             }
           />
+        
           <Route
-            exact path="/register"
+            path="/register"
             render={
               () => {
                 <RegistrationView/>
@@ -185,7 +189,7 @@ export class MainView extends React.Component {
           <Route
             exact path="movies/:movieId"
             render={
-              ({match})=> {
+              ({match})=> 
                 <Col
                   md={8}
                   className="mb-5"
@@ -193,18 +197,17 @@ export class MainView extends React.Component {
                   <MovieView
                     movie={
                       movies.find(
-                          (movie) => {
-                            movie._id === match.params.movieId
-                          }
-                        )
-                      }
+                        (movie) => movie._id === match.params.movieId
+                      )
+                    }
                   />
                 </Col>
-              }
+              
             }
           />   
       </Row>
      </Router>
+
     );
   }
 }
