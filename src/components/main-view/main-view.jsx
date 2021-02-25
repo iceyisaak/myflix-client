@@ -175,7 +175,7 @@ export class MainView extends React.Component {
           />
         
           <Route
-            path="/register"
+            exact path="/register"
             render={
               () => <RegistrationView/>
             }
@@ -200,7 +200,7 @@ export class MainView extends React.Component {
             }
           />   
       </Row>
-     </Router>
+    </Router>
 
     );
   }

@@ -127,7 +127,6 @@ export function RegistrationView (props) {
         </span>
         <Button
           variant="link"
-          onClick={handleSwitch}
           >
           Login
         </Button>

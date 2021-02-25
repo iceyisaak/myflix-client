@@ -17,7 +17,6 @@ export class MovieView extends React.Component{
 
   render(){
 
-    // Take in the props
     const {
       movie,
       onClick
@@ -34,19 +33,19 @@ export class MovieView extends React.Component{
           {movie.Title}
         </h2>
         <Image 
-         className="movie-poster mb-3"
-         src={movie.ImagePath}
-         alt="Movie Poster" 
-         />
-         <Form.Group controlId="formDescription">
+          className="movie-poster mb-3"
+          src={movie.ImagePath}
+          alt="Movie Poster" 
+        />
 
-         <Form.Label className="text-base font-weight-bold">
-           Description:
-         </Form.Label>
-         <Form.Text className="text-base">
-           {movie.Description}
-         </Form.Text>
-         </Form.Group>
+        <Form.Group controlId="formDescription">
+        <Form.Label className="text-base font-weight-bold">
+          Description:
+        </Form.Label>
+        <Form.Text className="text-base">
+          {movie.Description}
+        </Form.Text>
+        </Form.Group>
 
         <Form.Group controlId="formGenre">
           <Form.Label className="text-base font-weight-bold">
@@ -73,16 +72,15 @@ export class MovieView extends React.Component{
             </Link>
           </Form.Text>
         </Form.Group>
-
-         <Button 
-          // When clicked, the onClick() method of <MainView/> is called
-          onClick={() => onClick()}
-          variant="light"
-          className="mt-3"
-          size="lg"
-         >
-           Back
-         </Button>
+        <Link to={'/'}>
+          <Button 
+            variant="light"
+            className="mt-3"
+            size="lg"
+            >
+            Back
+          </Button>
+        </Link>
 
       </Form>
     );
@@ -95,7 +93,12 @@ MovieView.propTypes = {
   movie: PropTypes.shape({
     Title: PropTypes.string.isRequired,
     Description: PropTypes.string.isRequired,
-    ImagePath: PropTypes.string.isRequired
+    ImagePath: PropTypes.string.isRequired,
+    Genre: PropTypes.shape({
+      Name: PropTypes.string
+    }),
+    Director: PropTypes.shape({
+      Name: PropTypes.string
+    })
   }).isRequired
-
 }
