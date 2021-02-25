@@ -182,20 +182,21 @@ export class MainView extends React.Component {
           />
 
           <Route
-            exact path="movies/:movieId"
+            exact path="/movies/:movieId"
             render={
-              ({match}) => <Col
-                            md={8}
-                            className="mb-5"
-                            >
-                              <MovieView
-                                movie={
-                                  movies.find(
-                                    (movie) => movie._id === match.params.movieId
-                                  )
-                                }
-                              />
-                            </Col>
+              ({match}) => 
+              <Col
+                md={8}
+                className="mb-5"
+                >
+                  <MovieView
+                    movie={
+                      movies.find(
+                        (movie) => movie._id === match.params.movieId
+                      )
+                    }
+                  />
+              </Col>
             }
           />   
       </Row>
