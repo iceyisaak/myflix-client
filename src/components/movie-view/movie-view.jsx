@@ -18,8 +18,7 @@ export class MovieView extends React.Component{
   render(){
 
     const {
-      movie,
-      onClick
+      movie
     } = this.props;
 
     if(!movie) {

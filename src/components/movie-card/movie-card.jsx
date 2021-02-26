@@ -83,4 +83,3 @@ MovieCard.propTypes = {
   .isRequired
 
 };
-

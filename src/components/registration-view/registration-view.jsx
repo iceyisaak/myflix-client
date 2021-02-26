@@ -1,11 +1,12 @@
 import React, {useState} from 'react';
-import PropTypes from 'prop-types';
+import axios from 'axios';
+
+import {Link} from 'react-router-dom';
 
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
-import axios from 'axios';
 
-export function RegistrationView (props) {
+export default function RegistrationView (props) {
 
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -112,26 +113,29 @@ export function RegistrationView (props) {
           }
         />
       </Form.Group>
-
-      <Button
-        variant="primary"
-        type="submit"
-        onClick={handleRegister}
-      >
-        Register
-      </Button>
+     
+        <Button
+          variant="primary"
+          type="submit"
+          onClick={handleRegister}
+          >
+          Register
+        </Button>
 
       <Form.Group className="text-xs text-center mt-4">
         <span>
           Already have an account?
         </span>
+        <Link
+          to={'/'}
+        >
         <Button
           variant="link"
           >
           Login
         </Button>
+            </Link>
       </Form.Group>
-    
     
     </Form>
   )
