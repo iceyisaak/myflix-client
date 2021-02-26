@@ -11,14 +11,14 @@ export class GenreView extends React.Component{
   render(){
 
     const {
-      genre
+      movie
     } = this.props;
 
-    console.log([genre]);
+    console.log(movie);
 
     return(
       <div>
-        GENRE VIEW {genre}
+        GENRE VIEW
       </div>
     )
   }

@@ -26,6 +26,7 @@ export class MainView extends React.Component {
     this.state = {
       movies: [],
       user: null,
+      isLoading: false
     };
   }
 
@@ -125,7 +126,8 @@ export class MainView extends React.Component {
     // Destructure the states
     const { 
       movies,
-      user
+      user,
+      isLoading
       } = this.state;
 
 
@@ -165,6 +167,7 @@ export class MainView extends React.Component {
                         >
                           <MovieCard 
                             movie={movie}
+                            isLoading={isLoading}
                           />
                         </Col>
                       
@@ -208,7 +211,7 @@ export class MainView extends React.Component {
                 return(
                   
                   <GenreView
-                  genre={
+                  movie={
                     movies.find(
                       (movie) => movie.Genre.Name === match.params.name
                       )
