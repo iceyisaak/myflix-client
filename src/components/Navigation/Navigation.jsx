@@ -2,6 +2,8 @@ import React from 'react';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 
+import {Link} from 'react-router-dom';
+
 const Navigation = () => {
 
   return(
@@ -12,7 +14,9 @@ const Navigation = () => {
     className="mb-5"
     >
       <Navbar.Brand>
-        myFlix
+        <Link to="/">
+          myFlix
+        </Link>
       </Navbar.Brand>
       <Nav className="mr-auto">
         

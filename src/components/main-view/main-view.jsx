@@ -164,6 +164,7 @@ export class MainView extends React.Component {
                         <Col 
                           md={3} 
                           key={movie._id}
+                          className="my-4"
                         >
                           <MovieCard 
                             movie={movie}
@@ -217,7 +218,7 @@ export class MainView extends React.Component {
                       )
                     }
                   />
-                  
+
                 )
               }
             }
@@ -231,7 +232,7 @@ export class MainView extends React.Component {
                 return (
 
                   <DirectorView
-                    director={
+                    movie={
                       movies.find(
                         (movie) => movie.Director.Name === match.params.name
                       )

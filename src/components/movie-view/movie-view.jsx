@@ -82,7 +82,7 @@ export class MovieView extends React.Component{
             </Link>
           </Form.Text>
         </Form.Group>
-        
+
         <Link to={'/'}>
           <Button 
             variant="light"

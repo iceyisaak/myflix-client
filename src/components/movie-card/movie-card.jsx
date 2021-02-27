@@ -19,37 +19,38 @@ export class MovieCard extends React.Component{
 
     return (
       <Card 
-        className="card"
+        className="card h-100"
         >
           <Link
             to={`/movies/${movie._id}`}
+            className="d-flex flex-column h-100"
           >
               <Card.Img
                 variant="top"
                 src={movie.ImagePath}
               />
-              <Card.Body>
-              <Card.Title>
-                {movie.Title}
-              </Card.Title>
-              <Badge 
-                className="text-xs"
-                variant="secondary"
+              <Card.Body 
+                className="d-flex flex-column h-auto"
               >
-                {movie.Genre.Name}
-              </Badge>  
-              {/* <Link
-                to={`/movies/${movie._id}`}
-                > */}
+                <Card.Title>
+                  {movie.Title}
+                </Card.Title>
+                <Badge 
+                  className="text-xs align-self-start"
+                  variant="secondary"
+                >
+                  {movie.Genre.Name}
+                </Badge>  
+            
                   <Button 
+                    className="mt-auto"
                     variant="link"
                     size="lg"
                     block
                     >
                     See Details
                   </Button>
-                {/* </Link> */}
-              </Card.Body>
+                </Card.Body>
           </Link>
       </Card>
     );

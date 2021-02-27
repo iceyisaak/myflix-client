@@ -1,4 +1,5 @@
 import React from 'react';
+import Breadcrumb  from 'react-bootstrap/Breadcrumb';
 
 export class DirectorView extends React.Component {
 
@@ -21,15 +22,31 @@ export class DirectorView extends React.Component {
     return(
 
       <div>
+        <Breadcrumb>
+          <Breadcrumb.Item href="/">
+            Home
+          </Breadcrumb.Item>
+          <Breadcrumb.Item href={`/movies/${movie._id}`}>
+            {movie.Title}
+          </Breadcrumb.Item>
+          <Breadcrumb.Item href={`/directors/${movie.Director.Name}`}>
+            {movie.Director.Name}
+          </Breadcrumb.Item>
+        </Breadcrumb>
         <h1>
           {movie.Director.Name}
         </h1>
+        <span>
+          {movie.Director.Birth} - {movie.Director.Death}
+        </span>
         <h3>
           Bio:
         </h3>
         <p>
-          {movie.Director.bio}
+          {movie.Director.Bio}
         </p>
+    
+      
       </div>
     )
   }
