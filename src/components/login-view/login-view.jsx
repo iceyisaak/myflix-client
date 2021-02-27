@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 
+import { Link } from 'react-router-dom';
+
 
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
@@ -91,12 +93,14 @@ export function LoginView({
           Not yet a member?
         </span>
 
+      <Link to="/register">
         <Button
           variant="link"
           className="text-xs"
           >
           Register Now
         </Button>
+      </Link>
       </Form.Group>
     </Form>
 

@@ -1,10 +1,12 @@
 import React from 'react';
-import {BrowserRouter as Router, Route} from 'react-router-dom';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import axios from 'axios';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import Container from 'react-bootstrap/Container';
 
 // Import all the children components to be used
+import Navigation from '../Navigation/Navigation';
 import { MovieCard } from '../movie-card/movie-card';
 import { MovieView } from '../movie-view/movie-view';
 import { LoginView } from '../login-view/login-view';
@@ -70,6 +72,8 @@ export class MainView extends React.Component {
 
   // When user logs out
   onLoggedOut(){
+
+    console.log('onLoggedOut()');
 
     this.setState({
       user: null
@@ -139,8 +143,13 @@ export class MainView extends React.Component {
 
     // Return the component
     return (
-
+      
       <Router>
+        <Navigation
+          user={user}
+          onClick={this.onLoggedOut}
+        />
+        <Container>
         <Row className="main-view justify-content-md-center">
           <Route
             exact path="/"
@@ -253,6 +262,8 @@ export class MainView extends React.Component {
 
         
       </Row>
+    </Container>
+
     </Router>
 
     );

@@ -6,7 +6,7 @@ import {Link} from 'react-router-dom';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 
-export default function RegistrationView (props) {
+export function RegistrationView (props) {
 
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -52,7 +52,7 @@ export default function RegistrationView (props) {
     <Form>
       <Form.Group controlId="formUsername">
       <h1 className="h1">
-        Registration Form
+        Join Now!
       </h1>
         <Form.Label className="text-base">
           Username:

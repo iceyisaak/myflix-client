@@ -1,26 +1,60 @@
 import React from 'react';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
+import Button from 'react-bootstrap/Button';
 
-import {Link} from 'react-router-dom';
+const Navigation = ({
+  user,
+  onClick
+}) => {
 
-const Navigation = () => {
+ 
+
 
   return(
     
     <Navbar 
-    bg="light" 
-    variant="light"
-    className="mb-5"
+      bg="light" 
+      variant="light"
+      className="mb-5"
     >
-      <Navbar.Brand>
-        <Link to="/">
+      <Navbar.Brand href="/">
           myFlix
-        </Link>
       </Navbar.Brand>
+      <Navbar.Toggle
+        aria-controls="basic-navbar-nav"
+      />
+      <Navbar.Collapse id="basic-navbar-nav"> 
+
       <Nav className="mr-auto">
-        
+        <Nav.Link>
+          Portfolio Site
+        </Nav.Link>
+        <Nav.Link>
+          Github Repo
+        </Nav.Link>
       </Nav>
+      {
+
+       user && 
+       <div>
+        <Navbar.Text>
+          Hi {user} 
+        </Navbar.Text>
+          
+          <Button
+            variant="link"
+            size="sm"
+            onClick={()=>onClick}
+          >
+            Logout
+          </Button>
+       </div>
+       
+      }
+
+        
+      </Navbar.Collapse>
     </Navbar>
 
   );

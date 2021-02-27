@@ -1,11 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Container from 'react-bootstrap/Container';
 
 // Import MainView Component
 import {MainView} from './components/main-view/main-view';
-import Navigation from './components/Navigation/Navigation';
-
 
 // Import scss file (and bundle it too)
 import './index.scss';
@@ -16,10 +13,7 @@ class MyFlixApp extends React.Component{
   render() {
     return (
       <React.Fragment>
-        <Navigation/>
-        <Container>
-          <MainView/>
-        </Container>
+        <MainView/>
       </React.Fragment>
     );
   }
