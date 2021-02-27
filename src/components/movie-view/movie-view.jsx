@@ -1,10 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import Image from 'react-bootstrap/Image'
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import Breadcrumb from 'react-bootstrap/Breadcrumb';
 
 import './movie-view.scss';
 
@@ -21,11 +22,19 @@ export class MovieView extends React.Component{
       movie
     } = this.props;
 
-    if(!movie) {
-      return null;
-    }
+    if(!movie) return null;
 
     return (
+
+      <div>
+        <Breadcrumb>
+          <Breadcrumb.Item href="/">
+            Home
+          </Breadcrumb.Item>
+          <Breadcrumb.Item href={`/movies/${movie._id}`}>
+            {movie.Title}
+          </Breadcrumb.Item>
+        </Breadcrumb>
 
       <Form className="movie-view ">
         <h2 className="h2">
@@ -53,6 +62,7 @@ export class MovieView extends React.Component{
           <Form.Text className="text-base">
             <Link
               to={`/genres/${movie.Genre.Name}`}
+              movie={movie}
             >
               {movie.Genre.Name}
             </Link>
@@ -66,11 +76,13 @@ export class MovieView extends React.Component{
           <Form.Text className="text-base">
             <Link 
               to={`/directors/${movie.Director.Name}`}
+              movie={movie}
             >
-            {movie.Director.Name}
+              {movie.Director.Name}
             </Link>
           </Form.Text>
         </Form.Group>
+        
         <Link to={'/'}>
           <Button 
             variant="light"
@@ -82,6 +94,8 @@ export class MovieView extends React.Component{
         </Link>
 
       </Form>
+      </div>
+
     );
   }
 

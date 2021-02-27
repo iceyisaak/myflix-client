@@ -1,9 +1,9 @@
 import React from 'react';
+import Breadcrumb from 'react-bootstrap/Breadcrumb';
 
 export class GenreView extends React.Component{
 
   constructor(){
-
     super();
     this.state = {};
   }
@@ -16,9 +16,29 @@ export class GenreView extends React.Component{
 
     console.log(movie);
 
+    if(!movie) return 'Loading...';
+
     return(
       <div>
-        GENRE VIEW
+
+        <Breadcrumb>
+          <Breadcrumb.Item href="/">
+            Home
+          </Breadcrumb.Item>
+          <Breadcrumb.Item href={`/movies/${movie._id}`}>
+            {movie.Title}
+          </Breadcrumb.Item>
+          <Breadcrumb.Item href={`/genres/${movie.Genre.Name}`}>
+            {movie.Genre.Name}
+          </Breadcrumb.Item>
+        </Breadcrumb>
+        <h1>
+          {movie.Genre.Name}
+        </h1>
+        <p>
+          {movie.Genre.Description}
+        </p>
+
       </div>
     )
   }

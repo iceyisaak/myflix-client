@@ -191,7 +191,7 @@ export class MainView extends React.Component {
               <Col
                 md={8}
                 className="mb-5"
-                >
+              >
                   <MovieView
                     movie={
                       movies.find(
@@ -211,12 +211,13 @@ export class MainView extends React.Component {
                 return(
                   
                   <GenreView
-                  movie={
-                    movies.find(
-                      (movie) => movie.Genre.Name === match.params.name
+                    movie={
+                      movies.find(
+                        (movie) => movie.Genre.Name === match.params.name
                       )
                     }
-                    />
+                  />
+                  
                 )
               }
             }
@@ -225,15 +226,15 @@ export class MainView extends React.Component {
           <Route
             exact path="/directors/:name"
             render={
-              ({match}) =>{
+              ({match}) => {
                 if(!movies) return <MainView/>;
                 return (
 
                   <DirectorView
                     director={
                       movies.find(
-                        movie => movie.Director.Name === match.params.name
-                      ).Director
+                        (movie) => movie.Director.Name === match.params.name
+                      )
                     }
                   />
 
