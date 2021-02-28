@@ -145,12 +145,14 @@ export class MainView extends React.Component {
     return (
       
       <Router>
+
         <Navigation
           user={user}
           onLoggedOut={
             ()=>this.onLoggedOut()
           }
         />
+        
         <Container>
         <Row className="main-view justify-content-md-center">
           <Route
