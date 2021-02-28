@@ -132,7 +132,7 @@ export class MainView extends React.Component {
       movies,
       user,
       isLoading
-      } = this.state;
+    } = this.state;
 
 
     // Before the movies have been loaded
@@ -147,7 +147,9 @@ export class MainView extends React.Component {
       <Router>
         <Navigation
           user={user}
-          onClick={this.onLoggedOut}
+          onLoggedOut={
+            ()=>this.onLoggedOut()
+          }
         />
         <Container>
         <Row className="main-view justify-content-md-center">

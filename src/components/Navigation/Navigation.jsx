@@ -5,7 +5,7 @@ import Button from 'react-bootstrap/Button';
 
 const Navigation = ({
   user,
-  onClick
+  onLoggedOut
 }) => {
 
  
@@ -35,22 +35,20 @@ const Navigation = ({
         </Nav.Link>
       </Nav>
       {
-
-       user && 
-       <div>
-        <Navbar.Text>
-          Hi {user} 
-        </Navbar.Text>
-          
-          <Button
-            variant="link"
-            size="sm"
-            onClick={()=>onClick}
-          >
-            Logout
-          </Button>
-       </div>
-       
+        user && 
+        <div>
+          <Navbar.Text>
+            Hi {user} 
+          </Navbar.Text>
+            
+            <Button
+              variant="link"
+              size="sm"
+              onClick={() => onLoggedOut}
+            >
+              Logout
+            </Button>
+        </div>
       }
 
         
