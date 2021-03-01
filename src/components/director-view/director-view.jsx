@@ -14,7 +14,6 @@ export class DirectorView extends React.Component {
       movie
     } = this.props;
 
-    console.log(movie);
 
     if(!movie) return 'Loading...';
 
@@ -29,7 +28,7 @@ export class DirectorView extends React.Component {
           <Breadcrumb.Item href={`/movies/${movie._id}`}>
             {movie.Title}
           </Breadcrumb.Item>
-          <Breadcrumb.Item href={`/directors/${movie.Director.Name}`}>
+          <Breadcrumb.Item href={`/${movie._id}/directors/${movie.Director.Name}`}>
             {movie.Director.Name}
           </Breadcrumb.Item>
         </Breadcrumb>

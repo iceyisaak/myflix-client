@@ -75,7 +75,7 @@ export class MovieView extends React.Component{
           </Form.Label>
           <Form.Text className="text-base">
             <Link 
-              to={`/directors/${movie.Director.Name}`}
+              to={`/${movie._id}/directors/${movie.Director.Name}`}
               movie={movie}
             >
               {movie.Director.Name}

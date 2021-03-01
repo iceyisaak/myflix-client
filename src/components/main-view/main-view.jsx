@@ -266,7 +266,7 @@ export class MainView extends React.Component {
           />
 
           <Route
-            exact path="/directors/:name"
+            exact path="/:movieId/directors/:name"
             render={
               ({match}) => {
                 if(!movies) return <MainView/>;
@@ -276,6 +276,8 @@ export class MainView extends React.Component {
                     movie={
                       movies.find(
                         (movie) => movie.Director.Name === match.params.name
+                        &&
+                        movie._id === match.params.movieId
                       )
                     }
                   />
@@ -290,7 +292,13 @@ export class MainView extends React.Component {
             render={
               () => 
                 <ProfileView
-                  user={user}
+                  user={
+                    users.find(
+                      (user) => {
+                        user.Username === match.params.username
+                      }
+                    )
+                  }
                 />
             }
           />
