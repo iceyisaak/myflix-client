@@ -61,7 +61,7 @@ export class MovieView extends React.Component{
           </Form.Label>
           <Form.Text className="text-base">
             <Link
-              to={`/genres/${movie.Genre.Name}`}
+              to={`/${movie._id}/genres/${movie.Genre.Name}`}
               movie={movie}
             >
               {movie.Genre.Name}

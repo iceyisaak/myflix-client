@@ -27,7 +27,7 @@ export class MainView extends React.Component {
     // Initialse the states for this component
     this.state = {
       movies: [],
-      user: null,
+      user: [],
       isLoading: false
     };
   }
@@ -68,12 +68,12 @@ export class MainView extends React.Component {
 
     // Send 'authData.token' to .getMovies()
     this.getMovies(authData.token);
+
+    this.getUserInfo(authData);
   }
 
   // When user logs out
   onLoggedOut(){
-
-    console.log('onLoggedOut()');
 
     this.setState({
       user: null
@@ -124,6 +124,32 @@ export class MainView extends React.Component {
       );
   }
 
+  getUserInfo(token){
+
+    axios
+      .get(
+        'https://myflix-20210211.herokuapp.com/users/:Username',
+        {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        }
+      )
+      .then(
+        (response) => {
+          console.log(response);
+          this.setState({
+            user: response.data
+          })
+        }
+      )
+      .catch(
+        (err) => {
+          console.log(err);
+        }
+      )
+  }
+
   // Render the component
   render() {
 
@@ -152,7 +178,7 @@ export class MainView extends React.Component {
             ()=>this.onLoggedOut()
           }
         />
-        
+
         <Container>
         <Row className="main-view justify-content-md-center">
           <Route
@@ -218,7 +244,7 @@ export class MainView extends React.Component {
           />   
 
           <Route
-            exact path="/genres/:name"
+            exact path="/:movieId/genres/:name"
             render={
               ({match}) => {
                 if(!movies) return <MainView/>;
@@ -227,7 +253,9 @@ export class MainView extends React.Component {
                   <GenreView
                     movie={
                       movies.find(
-                        (movie) => movie.Genre.Name === match.params.name
+                        (movie) => movie.Genre.Name === match.params.name 
+                        &&
+                        movie._id === match.params.movieId
                       )
                     }
                   />
@@ -260,7 +288,10 @@ export class MainView extends React.Component {
           <Route
             exact path="/users/:username"
             render={
-              () => <ProfileView/>
+              () => 
+                <ProfileView
+                  user={user}
+                />
             }
           />
 
