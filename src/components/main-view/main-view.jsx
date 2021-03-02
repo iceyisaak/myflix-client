@@ -57,6 +57,7 @@ export class MainView extends React.Component {
   // Function: log in, takes in 'authData'
   onLoggedIn(authData){
     
+    
     // setState of 'user' to the value of 'authData', assigning it to the Username
     this.setState({
       user: authData.user.Username
@@ -69,7 +70,7 @@ export class MainView extends React.Component {
     // Send 'authData.token' to .getMovies()
     this.getMovies(authData.token);
 
-    this.getUserInfo(authData);
+    this.getUserInfo(authData.token);
   }
 
   // When user logs out
@@ -126,6 +127,8 @@ export class MainView extends React.Component {
 
   getUserInfo(token){
 
+    console.log('abc');
+
     axios
       .get(
         'https://myflix-20210211.herokuapp.com/users/:Username',
@@ -159,7 +162,7 @@ export class MainView extends React.Component {
       user,
       isLoading
     } = this.state;
-
+console.log(user);
 
     // Before the movies have been loaded
 
