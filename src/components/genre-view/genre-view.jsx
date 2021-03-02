@@ -22,19 +22,13 @@ export class GenreView extends React.Component{
       <div>
 
         <Breadcrumb>
-          <Breadcrumb.Item 
-            href="/"
-          >
+          <Breadcrumb.Item href="/">
             Home
           </Breadcrumb.Item>
-          <Breadcrumb.Item 
-            href={`/movies/${movie._id}`}
-          >
+          <Breadcrumb.Item href={`/movies/${movie._id}`}>
             {movie.Title}
           </Breadcrumb.Item>
-          <Breadcrumb.Item 
-            href={`/${movie._id}/genres/${movie.Genre.Name}`}
-          >
+          <Breadcrumb.Item href={`/genres/${movie.Genre.Name}`}>
             {movie.Genre.Name}
           </Breadcrumb.Item>
         </Breadcrumb>

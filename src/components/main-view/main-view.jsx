@@ -27,7 +27,7 @@ export class MainView extends React.Component {
     // Initialse the states for this component
     this.state = {
       movies: [],
-      user: [],
+      user: null,
       isLoading: false
     };
   }
@@ -70,11 +70,15 @@ export class MainView extends React.Component {
     // Send 'authData.token' to .getMovies()
     this.getMovies(authData.token);
 
+    
     this.getUserInfo(authData.token);
+
   }
 
   // When user logs out
   onLoggedOut(){
+
+    console.log('onLoggedOut()');
 
     this.setState({
       user: null
@@ -125,6 +129,7 @@ export class MainView extends React.Component {
       );
   }
 
+<<<<<<< HEAD
   getUserInfo(token){
 
     console.log('abc');
@@ -153,6 +158,8 @@ export class MainView extends React.Component {
       )
   }
 
+=======
+>>>>>>> parent of 338bf93... Debugged the GenreView
   // Render the component
   render() {
 
@@ -181,7 +188,7 @@ console.log(user);
             ()=>this.onLoggedOut()
           }
         />
-
+        
         <Container>
         <Row className="main-view justify-content-md-center">
           <Route
@@ -247,7 +254,7 @@ console.log(user);
           />   
 
           <Route
-            exact path="/:movieId/genres/:name"
+            exact path="/genres/:name"
             render={
               ({match}) => {
                 if(!movies) return <MainView/>;
@@ -256,9 +263,7 @@ console.log(user);
                   <GenreView
                     movie={
                       movies.find(
-                        (movie) => movie.Genre.Name === match.params.name 
-                        &&
-                        movie._id === match.params.movieId
+                        (movie) => movie.Genre.Name === match.params.name
                       )
                     }
                   />
@@ -293,6 +298,7 @@ console.log(user);
           <Route
             exact path="/users/:username"
             render={
+<<<<<<< HEAD
               () => 
                 <ProfileView
                   user={
@@ -303,6 +309,9 @@ console.log(user);
                     )
                   }
                 />
+=======
+              () => <ProfileView/>
+>>>>>>> parent of 338bf93... Debugged the GenreView
             }
           />
 
