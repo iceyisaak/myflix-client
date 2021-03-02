@@ -27,7 +27,7 @@ export class MainView extends React.Component {
     // Initialse the states for this component
     this.state = {
       movies: [],
-      user: null,
+      user: {},
       isLoading: false
     };
   }
@@ -60,17 +60,19 @@ export class MainView extends React.Component {
     
     // setState of 'user' to the value of 'authData', assigning it to the Username
     this.setState({
-      user: authData.user.Username
+      user: authData.user
     });
+
+    console.log('qqqqq',user);
 
     // setItem 'token' and 'user' in the localStorage
     localStorage.setItem('token', authData.token);
-    localStorage.setItem('user', authData.user.Username);
+    localStorage.setItem('user', authData.user);
 
     // Send 'authData.token' to .getMovies()
     this.getMovies(authData.token);
 
-    
+
     this.getUserInfo(authData.token);
 
   }
@@ -138,7 +140,7 @@ export class MainView extends React.Component {
       user,
       isLoading
     } = this.state;
-console.log(user);
+console.log(this.state);
 
     // Before the movies have been loaded
 
@@ -270,11 +272,7 @@ console.log(user);
               () => 
                 <ProfileView
                   user={
-                    users.find(
-                      (user) => {
-                        user.Username === match.params.username
-                      }
-                    )
+                   user
                   }
                 />
             }

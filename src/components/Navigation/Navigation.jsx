@@ -3,13 +3,15 @@ import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import Button from 'react-bootstrap/Button';
 
+import {Link} from 'react-router-dom';
+
 const Navigation = ({
   user,
   onLoggedOut
 }) => {
 
- 
 
+  console.log('11111', user);
 
   return(
     
@@ -39,7 +41,7 @@ const Navigation = ({
               <Nav.Link
                 variant="link"
                 size="sm"
-                onClick={handleLogout}
+                onClick={onLoggedOut}
                 >
                 Logout
               </Nav.Link>
