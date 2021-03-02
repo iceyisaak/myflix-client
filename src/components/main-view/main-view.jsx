@@ -129,37 +129,6 @@ export class MainView extends React.Component {
       );
   }
 
-<<<<<<< HEAD
-  getUserInfo(token){
-
-    console.log('abc');
-
-    axios
-      .get(
-        'https://myflix-20210211.herokuapp.com/users/:Username',
-        {
-          headers: {
-            Authorization: `Bearer ${token}`
-          }
-        }
-      )
-      .then(
-        (response) => {
-          console.log(response);
-          this.setState({
-            user: response.data
-          })
-        }
-      )
-      .catch(
-        (err) => {
-          console.log(err);
-        }
-      )
-  }
-
-=======
->>>>>>> parent of 338bf93... Debugged the GenreView
   // Render the component
   render() {
 
@@ -298,7 +267,6 @@ console.log(user);
           <Route
             exact path="/users/:username"
             render={
-<<<<<<< HEAD
               () => 
                 <ProfileView
                   user={
@@ -309,9 +277,6 @@ console.log(user);
                     )
                   }
                 />
-=======
-              () => <ProfileView/>
->>>>>>> parent of 338bf93... Debugged the GenreView
             }
           />
 

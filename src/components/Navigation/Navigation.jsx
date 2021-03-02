@@ -26,7 +26,6 @@ const Navigation = ({
       />
       <Navbar.Collapse id="basic-navbar-nav"> 
 
-<<<<<<< HEAD
         {
           user && 
           <div>
@@ -47,34 +46,6 @@ const Navigation = ({
             </Nav>
           </div>
         }
-=======
-      <Nav className="mr-auto">
-        <Nav.Link>
-          Portfolio Site
-        </Nav.Link>
-        <Nav.Link>
-          Github Repo
-        </Nav.Link>
-      </Nav>
-      {
-        user && 
-        <div>
-          <Navbar.Text>
-            Hi {user} 
-          </Navbar.Text>
-            
-            <Button
-              variant="link"
-              size="sm"
-              onClick={() => onLoggedOut}
-            >
-              Logout
-            </Button>
-        </div>
-      }
-
-        
->>>>>>> parent of 338bf93... Debugged the GenreView
       </Navbar.Collapse>
     </Navbar>
 
