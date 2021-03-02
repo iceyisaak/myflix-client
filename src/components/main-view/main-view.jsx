@@ -27,7 +27,7 @@ export class MainView extends React.Component {
     // Initialse the states for this component
     this.state = {
       movies: [],
-      user: {},
+      user: null,
       isLoading: false
     };
   }
@@ -60,14 +60,13 @@ export class MainView extends React.Component {
     
     // setState of 'user' to the value of 'authData', assigning it to the Username
     this.setState({
-      user: authData.user
+      user: authData.user.Username
     });
 
-    console.log('qqqqq',user);
 
     // setItem 'token' and 'user' in the localStorage
     localStorage.setItem('token', authData.token);
-    localStorage.setItem('user', authData.user);
+    localStorage.setItem('user', authData.user.Username);
 
     // Send 'authData.token' to .getMovies()
     this.getMovies(authData.token);
@@ -140,7 +139,6 @@ export class MainView extends React.Component {
       user,
       isLoading
     } = this.state;
-console.log(this.state);
 
     // Before the movies have been loaded
 
@@ -225,7 +223,7 @@ console.log(this.state);
           />   
 
           <Route
-            exact path="/genres/:name"
+            exact path="/:movieId/genres/:name"
             render={
               ({match}) => {
                 if(!movies) return <MainView/>;
@@ -235,6 +233,8 @@ console.log(this.state);
                     movie={
                       movies.find(
                         (movie) => movie.Genre.Name === match.params.name
+                        &&
+                        movie._id === match.params.movieId
                       )
                     }
                   />
@@ -272,7 +272,7 @@ console.log(this.state);
               () => 
                 <ProfileView
                   user={
-                   user
+                    user
                   }
                 />
             }

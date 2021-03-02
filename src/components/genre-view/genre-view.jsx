@@ -28,7 +28,7 @@ export class GenreView extends React.Component{
           <Breadcrumb.Item href={`/movies/${movie._id}`}>
             {movie.Title}
           </Breadcrumb.Item>
-          <Breadcrumb.Item href={`/genres/${movie.Genre.Name}`}>
+          <Breadcrumb.Item href={`/${movie._id}/genres/${movie.Genre.Name}`}>
             {movie.Genre.Name}
           </Breadcrumb.Item>
         </Breadcrumb>

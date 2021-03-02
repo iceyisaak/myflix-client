@@ -11,7 +11,6 @@ const Navigation = ({
 }) => {
 
 
-  console.log('11111', user);
 
   return(
     
@@ -26,7 +25,7 @@ const Navigation = ({
       <Navbar.Toggle
         aria-controls="basic-navbar-nav"
       />
-      <Navbar.Collapse id="basic-navbar-nav"> 
+      <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end"> 
 
         {
           user && 

@@ -47,12 +47,12 @@ export class MovieView extends React.Component{
         />
 
         <Form.Group controlId="formDescription">
-        <Form.Label className="text-base font-weight-bold">
-          Description:
-        </Form.Label>
-        <Form.Text className="text-base">
-          {movie.Description}
-        </Form.Text>
+          <Form.Label className="text-base font-weight-bold">
+            Description:
+          </Form.Label>
+          <Form.Text className="text-base">
+            {movie.Description}
+          </Form.Text>
         </Form.Group>
 
         <Form.Group controlId="formGenre">
@@ -61,7 +61,7 @@ export class MovieView extends React.Component{
           </Form.Label>
           <Form.Text className="text-base">
             <Link
-              to={`/genres/${movie.Genre.Name}`}
+              to={`/${movie._id}/genres/${movie.Genre.Name}`}
               movie={movie}
             >
               {movie.Genre.Name}
