@@ -28,6 +28,7 @@ export class MainView extends React.Component {
     this.state = {
       movies: [],
       user: null,
+      userInfo:[],
       isLoading: false
     };
   }
@@ -130,6 +131,30 @@ export class MainView extends React.Component {
       );
   }
 
+  getUserInfo(token) {
+
+    axios.get(
+      'https://myflix-20210211.herokuapp.com/users',
+      {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      }
+    )
+    .then(
+      (response) => {
+        this.setState({
+          userInfo: response.data
+        })
+      }
+    )
+    .catch(
+      (err) => {
+        console.log(err);
+      }
+    )
+  }
+
   // Render the component
   render() {
 
@@ -137,6 +162,7 @@ export class MainView extends React.Component {
     const { 
       movies,
       user,
+      getUserInfo,
       isLoading
     } = this.state;
 
@@ -180,7 +206,7 @@ export class MainView extends React.Component {
                     movies.map(
                       (movie) => 
                         <Col 
-                          md={3} 
+                          md={4} 
                           key={movie._id}
                           className="my-4"
                         >
@@ -269,12 +295,21 @@ export class MainView extends React.Component {
           <Route
             exact path="/users/:username"
             render={
-              () => 
-                <ProfileView
-                  user={
-                    user
-                  }
-                />
+              ({match}) => 
+                // <ProfileView
+                //   userInfo={
+                //     userInfo.find(
+                //       (user) => user.Username === match.params.name
+                //     )
+                //   }
+                // />
+                <Row className="w-100">
+                  <Col sm={12}>
+                    <ProfileView
+                      user={user}
+                    />
+                  </Col>
+                </Row>
             }
           />
 
