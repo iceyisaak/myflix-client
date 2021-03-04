@@ -129,16 +129,14 @@ export function RegistrationView (props) {
         <Link
           to={'/'}
         >
-        <Button
-          variant="link"
-          >
-          Login
-        </Button>
-            </Link>
+          <Button
+            variant="link"
+            >
+            Login
+          </Button>
+        </Link>
       </Form.Group>
     
     </Form>
   )
-
-  
 }

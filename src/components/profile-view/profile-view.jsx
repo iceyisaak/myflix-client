@@ -11,7 +11,8 @@ export class ProfileView extends React.Component{
   render(){
 
     const{
-      user
+      userInfo,
+      handleDeleteAccount
     } = this.props;
 
     return(
@@ -42,7 +43,8 @@ export class ProfileView extends React.Component{
           </Tab.Container>
 
           <ProfileInfo
-            user={user}
+            userInfo={userInfo}
+            onDeleteAccount={handleDeleteAccount}
           />
         </div>
 

@@ -51,6 +51,8 @@ export class MainView extends React.Component {
 
       // Pass accessToken to getMovies()
       this.getMovies(accessToken);
+
+      this.getUserInfo(accessToken);
     }
   }
 
@@ -75,12 +77,12 @@ export class MainView extends React.Component {
 
     this.getUserInfo(authData.token);
 
+    // this.onDeleteAccount(authData.token);
+
   }
 
   // When user logs out
   onLoggedOut(){
-
-    console.log('onLoggedOut()');
 
     this.setState({
       user: null
@@ -89,6 +91,45 @@ export class MainView extends React.Component {
     // Remove token & user from localStorage
     localStorage.removeItem('token');
     localStorage.removeItem('user');
+
+    window.open(
+      '/',
+      '_self'
+    );
+  }
+
+  handleDeleteAccount(token){
+
+    const username = localStorage.getItem('user');
+
+    axios
+      .delete(
+        `https://myflix-20210211.herokuapp.com/users/${username}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`
+          } 
+        }
+      )
+      .then(
+        (response) => {
+          const data = response.data;
+          console.log(data)
+          this.onLoggedOut();
+        }
+      )
+      .catch(
+        (err) => {
+          console.log(err);
+        }
+      )
+  }
+
+  handleUpdateUser(user){
+
+    // const username = localStorage.getItem('user');
+    console.log('handleUpdateUser()');
+    
   }
 
 
@@ -133,8 +174,10 @@ export class MainView extends React.Component {
 
   getUserInfo(token) {
 
+    const username = localStorage.getItem('user');
+
     axios.get(
-      'https://myflix-20210211.herokuapp.com/users',
+      `https://myflix-20210211.herokuapp.com/users/${username}`,
       {
         headers: {
           Authorization: `Bearer ${token}`
@@ -162,7 +205,7 @@ export class MainView extends React.Component {
     const { 
       movies,
       user,
-      getUserInfo,
+      userInfo,
       isLoading
     } = this.state;
 
@@ -295,18 +338,15 @@ export class MainView extends React.Component {
           <Route
             exact path="/users/:username"
             render={
-              ({match}) => 
-                // <ProfileView
-                //   userInfo={
-                //     userInfo.find(
-                //       (user) => user.Username === match.params.name
-                //     )
-                //   }
-                // />
+              () => 
+              
                 <Row className="w-100">
                   <Col sm={12}>
                     <ProfileView
-                      user={user}
+                      userInfo={userInfo}
+                      onDeleteAccount={
+                        (user) => this.handleDeleteAccount(user)
+                      }
                     />
                   </Col>
                 </Row>
