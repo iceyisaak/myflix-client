@@ -73,11 +73,7 @@ export class MainView extends React.Component {
 
     // Send 'authData.token' to .getMovies()
     this.getMovies(authData.token);
-
-
     this.getUserInfo(authData.token);
-
-    // this.onDeleteAccount(authData.token);
 
   }
 
@@ -100,6 +96,7 @@ export class MainView extends React.Component {
 
   handleDeleteAccount(token){
 
+    console.log('handleDeleteAccount()');
     const username = localStorage.getItem('user');
 
     axios
@@ -125,10 +122,17 @@ export class MainView extends React.Component {
       )
   }
 
-  handleUpdateUser(user){
+  handleUpdateProfile(token){
 
     // const username = localStorage.getItem('user');
-    console.log('handleUpdateUser()');
+    console.log('handleUpdateProfile()');
+
+    const username = localStorage.getItem('user');
+
+    axios
+      .get(
+        ''
+      )
     
   }
 
@@ -344,8 +348,11 @@ export class MainView extends React.Component {
                   <Col sm={12}>
                     <ProfileView
                       userInfo={userInfo}
+                      onUpdateProfile={
+                        () => this.handleUpdateProfile()
+                      }
                       onDeleteAccount={
-                        (user) => this.handleDeleteAccount(user)
+                        (token) => this.handleDeleteAccount(token)
                       }
                     />
                   </Col>

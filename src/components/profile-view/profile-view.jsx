@@ -12,7 +12,8 @@ export class ProfileView extends React.Component{
 
     const{
       userInfo,
-      handleDeleteAccount
+      onUpdateProfile,
+      onDeleteAccount
     } = this.props;
 
     return(
@@ -44,7 +45,8 @@ export class ProfileView extends React.Component{
 
           <ProfileInfo
             userInfo={userInfo}
-            onDeleteAccount={handleDeleteAccount}
+            onUpdateProfile={onUpdateProfile}
+            onDeleteAccount={onDeleteAccount}
           />
         </div>
 

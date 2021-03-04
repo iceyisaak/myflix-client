@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import moment from 'moment';
 
 import {Link} from 'react-router-dom';
@@ -8,10 +8,13 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 
+const [update, setUpdate] = useState(false);
+
 
 const ProfileInfo = ({
   userInfo,
-  handleDeleteAccount
+  onUpdateProfile,
+  onDeleteAccount
 }) => {
   return (
 
@@ -24,6 +27,12 @@ const ProfileInfo = ({
           Username
         </Form.Label>
         <Col sm="9">
+          {
+            update &&
+            <Form.Control
+              defaultValue={userInfo.Username}
+            />
+          }
           <Form.Control 
             plaintext 
             readOnly
@@ -37,6 +46,12 @@ const ProfileInfo = ({
           Email
         </Form.Label>
         <Col sm="10">
+          {
+            update &&
+            <Form.Control
+              defaultValue={userInfo.Email}
+            />
+          }
           <Form.Control 
             type="email" 
             plaintext 
@@ -66,17 +81,55 @@ const ProfileInfo = ({
           Birthday
         </Form.Label>
         <Col sm="10">
+          {
+            update &&
+            <Form.Control
+              defaultValue={
+                moment(userInfo.Birthday).format('YYYY-MM-DD')
+              }
+            />
+          }
           <Form.Control
             type="text"
             plaintext
             readOnly
-            defaultValue={moment(userInfo.Birthday).format('YYYY-MM-DD')}
+            defaultValue={
+              moment(userInfo.Birthday).format('YYYY-MM-DD')
+            }
           />
         </Col>
       </Form.Group>
 
-      <Button>
-        Edit My Profile
+    { 
+      update &&
+
+      <div>
+
+        <Button
+            onClick={
+              onUpdateProfile
+            }
+          >
+          Save Update
+        </Button>
+          {' '}
+     
+          <Button variant="outline-primary"
+            onClick={
+              () => setUpdate(false)
+            }
+          >
+            Cancel
+          </Button>
+
+      </div>
+    }
+     <Button
+        onClick={
+          setUpdate(true)
+        }
+      >
+        Update My Profile
       </Button>
       {' '}
       <Link to="/">
@@ -84,16 +137,17 @@ const ProfileInfo = ({
           Back to Home
         </Button>
       </Link>
+      
 
       <hr className="mb-5"/>
 
       <h2>Danger Zone</h2>
       <p>Warning! The following action cannot be undone.</p>
       <Button 
-      variant="danger"
-      onClick={
-        ()=> handleDeleteAccount 
-      }
+        variant="danger"
+        onClick={
+          onDeleteAccount 
+        }
       >
         Delete My Account
       </Button>
