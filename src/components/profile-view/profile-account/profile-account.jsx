@@ -31,55 +31,53 @@ const ProfileAccount = ({
   return (
 
     <Form>
-
       <h1 className="my-5">My Account</h1>
-    <Form.Group as={Row}>
-      <Form.Label column sm="2">
-        Password
-      </Form.Label>
-      <Col sm="5">
-        {
-          changePassword?
-          <div>
-            <Form.Control
-              type="password"
-            />
-            <Button
-              onClick={handleSaveNewPassword}
-            >
-              Save New Password
-            </Button>
-            {' '}
-            <Button
-              onClick={handleCancelChangePassword}
-              variant="outline-primary"
-            >
-              Cancel
-            </Button>
-          </div>
-          :
-          <div>
-            <Form.Control
-              type="password" 
-              plaintext 
-              readOnly 
-              defaultValue="password"
-            />
-            <Button
-              variant="link"
-              onClick={handleChangePassword}
-            >
-              Change Password
-            </Button>
-          </div>
-        }
-      </Col>
-    </Form.Group>
+      <Form.Group as={Row}>
+        <Form.Label column sm="2">
+          Password
+        </Form.Label>
+        <Col sm="5">
+          {
+            changePassword?
+            <div>
+              <Form.Control
+                type="password"
+              />
+              <Button
+                onClick={handleSaveNewPassword}
+              >
+                Save New Password
+              </Button>
+              {' '}
+              <Button
+                onClick={handleCancelChangePassword}
+                variant="outline-primary"
+              >
+                Cancel
+              </Button>
+            </div>
+            :
+            <div>
+              <Form.Control
+                type="password" 
+                plaintext 
+                readOnly 
+                defaultValue="password"
+              />
+              <Button
+                variant="link"
+                onClick={handleChangePassword}
+              >
+                Change Password
+              </Button>
+            </div>
+          }
+        </Col>
+      </Form.Group>
 
-    <hr className="mb-5"/>
+      <hr className="mb-5"/>
 
-    
-    <h2 className="mt-4 mb-2">Danger Zone</h2>
+      <h2 className="mt-4 mb-2">Danger Zone</h2>
         <p className="mb-5">Warning! The following action cannot be undone.</p>
         <Button 
           variant="danger"
@@ -94,4 +92,4 @@ const ProfileAccount = ({
   )
 }
 
-export default ProfileAccount
+export default ProfileAccount;

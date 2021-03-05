@@ -25,14 +25,18 @@ const ProfileInfo = ({
     setUpdateProfile(false);
   }
 
-  const handleSaveUpdateProfile = () => {
-    onUpdateProfile()
+  const handleSaveUpdateProfile = (e) => {
+
+    e.preventDefault();
+    onUpdateProfile();
+    console.log(Username);
+    setUpdateProfile(false);
   }
 
 
   return (
 
-      <Form className="ProfileInfo">
+      <Form className="ProfileInfo" >
         <h1 className="my-5">
             My Profile
         </h1>
@@ -109,12 +113,10 @@ const ProfileInfo = ({
 
       { 
         updateProfile &&
-
         <div>
           <Button
             onClick={
-              // handleSaveUpdateProfile
-              onUpdateProfile
+              (e) => handleSaveUpdateProfile(e)
             }
             type="submit"
             >

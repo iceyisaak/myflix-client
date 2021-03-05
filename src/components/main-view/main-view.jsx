@@ -124,12 +124,44 @@ export class MainView extends React.Component {
 
   handleUpdateProfile(token){
 
+    const username = localStorage.getItem('user');
+
     // const username = localStorage.getItem('user');
     console.log('handleUpdateProfile()');
 
-    const username = localStorage.getItem('user');
+    // console.log(Username);
+    // console.log(Password);
+    // console.log(Email);
+    // console.log(Birthday);
 
-    
+    axios
+      .put(
+        `https://myflix-20210211.herokuapp.com/users/${username}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        },
+        {
+          Username,
+          Password,
+          Email,
+          Birthday
+        }
+      )
+      .then(
+        (response) => {
+          const data = response.data;
+          console.log(data);
+
+        }
+      )
+      .catch(
+        (err) => {
+          console.log(err);
+        }
+      )
+
   }
 
 
