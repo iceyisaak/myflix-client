@@ -129,10 +129,6 @@ export class MainView extends React.Component {
 
     const username = localStorage.getItem('user');
 
-    axios
-      .get(
-        ''
-      )
     
   }
 

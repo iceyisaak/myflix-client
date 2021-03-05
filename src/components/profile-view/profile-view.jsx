@@ -1,8 +1,11 @@
 import React from 'react';
 import ProfileInfo from './profile-info/profile-info';
+import FavouriteMovie from './favourite-movie/favourite-movie';
+import ProfileAccount from './profile-account/profile-account';
 
 
 import './profile-view.scss';
+import Tabs from 'react-bootstrap/Tabs';
 import Tab from 'react-bootstrap/Tab';
 import Nav from 'react-bootstrap/Nav';
 
@@ -19,35 +22,25 @@ export class ProfileView extends React.Component{
     return(
       
         <div>
-          <Tab.Container>
-            <Nav 
-              justify variant="tabs" 
-              defaultActiveKey="/users/:username" 
-              className="mb-5 w-100"
-            >
-              <Nav.Item>
-                <Nav.Link href="/users/:username">
-                  Profile
-                </Nav.Link>
-              </Nav.Item>
-              <Nav.Item>
-                <Nav.Link eventKey="link-1">
-                  Favourite Movies
-                </Nav.Link>
-              </Nav.Item>
-              <Nav.Item>
-                <Nav.Link eventKey="link-2">
-                  Account
-                </Nav.Link>
-              </Nav.Item>
-            </Nav>
-          </Tab.Container>
-
-          <ProfileInfo
-            userInfo={userInfo}
-            onUpdateProfile={onUpdateProfile}
-            onDeleteAccount={onDeleteAccount}
-          />
+          <Tabs defaultActiveKey="profile">
+            <Tab eventKey="profile" title="Profile">
+              <ProfileInfo
+                userInfo={userInfo}
+                onUpdateProfile={onUpdateProfile}
+                />
+            </Tab>
+            <Tab eventKey="favouriteMovie" title="Favourite Movie">
+              <FavouriteMovie
+                userInfo={userInfo}
+              />
+            </Tab>
+            <Tab eventKey="account" title="Account">
+              <ProfileAccount
+                userInfo={userInfo}
+                onDeleteAccount={onDeleteAccount}
+              />
+            </Tab>
+          </Tabs>
         </div>
 
     );
