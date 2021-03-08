@@ -28,20 +28,18 @@ export class ProfileView extends React.Component{
               <ProfileInfo
                 userInfo={userInfo}
                 onUpdateProfile={onUpdateProfile}
-                />
-            </Tab>
-            <Tab eventKey="favouriteMovie" title="Favourite Movie">
-              <FavouriteMovie
-                userInfo={userInfo}
+                onDeleteAccount={onDeleteAccount}
                 movies={movies}
               />
             </Tab>
-            <Tab eventKey="account" title="Account">
-              <ProfileAccount
+            <Tab eventKey="favouriteMovie" title="Favourite Movie">
+              {/* <FavouriteMovie
                 userInfo={userInfo}
-                onDeleteAccount={onDeleteAccount}
-              />
+                movies={movies}
+              /> */}
+              abc
             </Tab>
+            <Tab></Tab>
           </Tabs>
         </div>
 

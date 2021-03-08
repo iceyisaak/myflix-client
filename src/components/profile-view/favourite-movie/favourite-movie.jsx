@@ -5,6 +5,7 @@ const FavouriteMovie = ({
   movies
 }) => {
 
+  console.log(userInfo);
 
   return (
     <div>

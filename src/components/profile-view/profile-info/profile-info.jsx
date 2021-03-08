@@ -11,7 +11,8 @@ import Button from 'react-bootstrap/Button';
 
 const ProfileInfo = ({
   userInfo,
-  onUpdateProfile
+  onUpdateProfile,
+  onDeleteAccount
 }) => {
 
   const [updateProfile, setUpdateProfile] = useState(false);
@@ -28,7 +29,7 @@ const ProfileInfo = ({
   const handleSaveUpdateProfile = (e) => {
 
     e.preventDefault();
-    onUpdateProfile();
+    onUpdateProfile(Username, Password, Email, Birthday);
     console.log(Username);
     setUpdateProfile(false);
   }
@@ -53,9 +54,9 @@ const ProfileInfo = ({
             />
             :
             <Form.Control 
-            plaintext 
-            readOnly
-            defaultValue={userInfo.Username}
+              plaintext 
+              readOnly
+              defaultValue={userInfo.Username}
             />
           }
         </Col>
@@ -131,8 +132,6 @@ const ProfileInfo = ({
         </Col>
       </Form.Group>
 
-        <hr className="mb-5"/>
-
       { 
         updateProfile &&
         <div>
@@ -174,6 +173,19 @@ const ProfileInfo = ({
           </Link>
         </div>
       }
+
+      <hr className="my-5"/>
+
+      <h2 className="mt-4 mb-2">Danger Zone</h2>
+        <p className="mb-5">Warning! The following action cannot be undone.</p>
+        <Button 
+          variant="danger"
+          onClick={
+            onDeleteAccount 
+          }
+        >
+          Delete My Account
+        </Button>
       
     </Form>
   )
