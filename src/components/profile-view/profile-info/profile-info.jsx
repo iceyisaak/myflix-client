@@ -28,11 +28,55 @@ const ProfileInfo = ({
 
   const handleSaveUpdateProfile = (e, Username, Password, Email, Birthday) => {
 
+    // e.preventDefault();
+    // onUpdateProfile(Username, Password, Email, Birthday);
+    // console.log(Username);
+    // setUpdateProfile(false);
+
+    const username = localStorage.getItem('user');
+    const token = localStorage.getItem('token');
+    console.log('handleUpdateProfile()');
+
     e.preventDefault();
-    onUpdateProfile(Username, Password, Email, Birthday);
+
+
     console.log(Username);
-    setUpdateProfile(false);
+    console.log(Password);
+    console.log(Email);
+    console.log(Birthday);
+
+    axios
+      .put(
+        `https://myflix-20210211.herokuapp.com/users/${username}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        },
+        {
+          Username,
+          Password,
+          Email,
+          Birthday
+        }
+          
+      )
+      .then(
+        (response) => {
+          const data = response.data;
+          console.log(data);
+        }
+      )
+      .catch(
+        (err) => {
+          console.log(err);
+        }
+      )
+
+
   }
+
+
 
 
   return (

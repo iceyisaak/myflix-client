@@ -129,51 +129,51 @@ export class MainView extends React.Component {
       )
   }
 
-  handleUpdateProfile(Username, Password, Email, Birthday){
+  // handleUpdateProfile(Username, Password, Email, Birthday){
 
-    const username = localStorage.getItem('user');
-    const token = localStorage.getItem('token');
-    console.log('handleUpdateProfile()');
+  //   const username = localStorage.getItem('user');
+  //   const token = localStorage.getItem('token');
+  //   console.log('handleUpdateProfile()');
 
-    console.log(Username);
-    console.log(Password);
-    console.log(Email);
-    console.log(Birthday);
-    
-    this.setState({
-      profile: {
-        Username,
-        Password,
-        Email,
-        Birthday
-      }
-    })
+  //   console.log(Username);
+  //   console.log(Password);
+  //   console.log(Email);
+  //   console.log(Birthday);
 
-    axios
-      .put(
-        `https://myflix-20210211.herokuapp.com/users/${username}`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`
-          }
-        },
-        {
-          profile
-        }     
-      )
-      .then(
-        (response) => {
-          const data = response.data;
-          console.log(data);
-        }
-      )
-      .catch(
-        (err) => {
-          console.log(err);
-        }
-      )
+  //   this.setState({
+  //     profile: {
+  //       Username,
+  //       Password,
+  //       Email,
+  //       Birthday
+  //     }
+  //   })
 
-  }
+  //   axios
+  //     .put(
+  //       `https://myflix-20210211.herokuapp.com/users/${username}`,
+  //       {
+  //         headers: {
+  //           Authorization: `Bearer ${token}`
+  //         }
+  //       },
+        
+  //         this.state.profile
+           
+  //     )
+  //     .then(
+  //       (response) => {
+  //         const data = response.data;
+  //         console.log(data);
+  //       }
+  //     )
+  //     .catch(
+  //       (err) => {
+  //         console.log(err);
+  //       }
+  //     )
+
+  // }
 
 
 
