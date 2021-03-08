@@ -82,6 +82,28 @@ const ProfileInfo = ({
           }
         </Col>
       </Form.Group>
+     
+      <Form.Group as={Row}>
+        <Form.Label column sm="2">
+          Password
+        </Form.Label>
+        <Col sm="10">
+          {
+            updateProfile? 
+            <Form.Control
+              type="password"
+              defaultValue={userInfo.Password}
+            />
+            :
+            <Form.Control 
+              type="password" 
+              plaintext 
+              readOnly 
+              defaultValue={userInfo.Password}
+            />
+          }
+        </Col>
+      </Form.Group>
 
       <Form.Group as={Row}>
         <Form.Label column sm={2}>
@@ -116,7 +138,7 @@ const ProfileInfo = ({
         <div>
           <Button
             onClick={
-              (e) => handleSaveUpdateProfile(e)
+              (e) => handleSaveUpdateProfile(Useraname, Password, Email, Birthday)
             }
             type="submit"
             >

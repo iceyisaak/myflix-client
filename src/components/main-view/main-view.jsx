@@ -29,7 +29,13 @@ export class MainView extends React.Component {
       movies: [],
       user: null,
       userInfo:[],
-      isLoading: false
+      isLoading: false,
+      profile: {
+        Username:'',
+        Password:'',
+        Email:'',
+        Birthday:''
+      }
     };
   }
 
@@ -94,10 +100,11 @@ export class MainView extends React.Component {
     );
   }
 
-  handleDeleteAccount(token){
+  handleDeleteAccount(){
 
     console.log('handleDeleteAccount()');
     const username = localStorage.getItem('user');
+    const token = localStorage.getItem('token');
 
     axios
       .delete(
@@ -122,17 +129,24 @@ export class MainView extends React.Component {
       )
   }
 
-  handleUpdateProfile(token){
+  handleUpdateProfile(){
 
     const username = localStorage.getItem('user');
-
-    // const username = localStorage.getItem('user');
+    const token = localStorage.getItem('token');
     console.log('handleUpdateProfile()');
 
     // console.log(Username);
     // console.log(Password);
     // console.log(Email);
     // console.log(Birthday);
+    this.setState({
+      profile: {
+        Username,
+        Password,
+        Email,
+        Birthday
+      }
+    })
 
     axios
       .put(
@@ -143,17 +157,13 @@ export class MainView extends React.Component {
           }
         },
         {
-          Username,
-          Password,
-          Email,
-          Birthday
-        }
+          profile
+        }     
       )
       .then(
         (response) => {
           const data = response.data;
           console.log(data);
-
         }
       )
       .catch(
@@ -382,6 +392,7 @@ export class MainView extends React.Component {
                       onDeleteAccount={
                         (token) => this.handleDeleteAccount(token)
                       }
+                      movies={movies}
                     />
                   </Col>
                 </Row>

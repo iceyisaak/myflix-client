@@ -16,7 +16,8 @@ export class ProfileView extends React.Component{
     const{
       userInfo,
       onUpdateProfile,
-      onDeleteAccount
+      onDeleteAccount,
+      movies
     } = this.props;
 
     return(
@@ -32,6 +33,7 @@ export class ProfileView extends React.Component{
             <Tab eventKey="favouriteMovie" title="Favourite Movie">
               <FavouriteMovie
                 userInfo={userInfo}
+                movies={movies}
               />
             </Tab>
             <Tab eventKey="account" title="Account">
