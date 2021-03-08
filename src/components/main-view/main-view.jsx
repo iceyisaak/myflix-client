@@ -135,10 +135,11 @@ export class MainView extends React.Component {
     const token = localStorage.getItem('token');
     console.log('handleUpdateProfile()');
 
-    // console.log(Username);
-    // console.log(Password);
-    // console.log(Email);
-    // console.log(Birthday);
+    console.log(Username);
+    console.log(Password);
+    console.log(Email);
+    console.log(Birthday);
+    
     this.setState({
       profile: {
         Username,
