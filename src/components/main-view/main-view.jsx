@@ -129,7 +129,7 @@ export class MainView extends React.Component {
       )
   }
 
-  handleUpdateProfile(){
+  handleUpdateProfile(Username, Password, Email, Birthday){
 
     const username = localStorage.getItem('user');
     const token = localStorage.getItem('token');

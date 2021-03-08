@@ -26,7 +26,7 @@ const ProfileInfo = ({
     setUpdateProfile(false);
   }
 
-  const handleSaveUpdateProfile = (e) => {
+  const handleSaveUpdateProfile = (e, Username, Password, Email, Birthday) => {
 
     e.preventDefault();
     onUpdateProfile(Username, Password, Email, Birthday);
@@ -137,7 +137,7 @@ const ProfileInfo = ({
         <div>
           <Button
             onClick={
-              (e) => handleSaveUpdateProfile(Useraname, Password, Email, Birthday)
+              (e) => handleSaveUpdateProfile(e)
             }
             type="submit"
             >
