@@ -15,8 +15,7 @@ export class ProfileView extends React.Component{
 
     const{
       userInfo,
-      onUpdateProfile,
-      onDeleteAccount,
+      onLoggedOut,
       movies
     } = this.props;
 
@@ -27,8 +26,7 @@ export class ProfileView extends React.Component{
             <Tab eventKey="profile" title="Profile">
               <ProfileInfo
                 userInfo={userInfo}
-                onUpdateProfile={onUpdateProfile}
-                onDeleteAccount={onDeleteAccount}
+                onLoggedOut={onLoggedOut}
                 movies={movies}
               />
             </Tab>

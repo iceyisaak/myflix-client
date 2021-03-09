@@ -29,7 +29,6 @@ export class MainView extends React.Component {
       movies: [],
       user: null,
       userInfo:[],
-      isLoading: false,
       profile: {
         Username:'',
         Password:'',
@@ -55,7 +54,7 @@ export class MainView extends React.Component {
         user: localStorage.getItem('user')
       });
 
-      // Pass accessToken to getMovies()
+      // Pass accessToken to other functions
       this.getMovies(accessToken);
 
       this.getUserInfo(accessToken);
@@ -66,12 +65,10 @@ export class MainView extends React.Component {
   // Function: log in, takes in 'authData'
   onLoggedIn(authData){
     
-    
     // setState of 'user' to the value of 'authData', assigning it to the Username
     this.setState({
       user: authData.user.Username
     });
-
 
     // setItem 'token' and 'user' in the localStorage
     localStorage.setItem('token', authData.token);
@@ -99,81 +96,6 @@ export class MainView extends React.Component {
       '_self'
     );
   }
-
-  handleDeleteAccount(){
-
-    console.log('handleDeleteAccount()');
-    const username = localStorage.getItem('user');
-    const token = localStorage.getItem('token');
-
-    axios
-      .delete(
-        `https://myflix-20210211.herokuapp.com/users/${username}`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`
-          } 
-        }
-      )
-      .then(
-        (response) => {
-          const data = response.data;
-          console.log(data)
-          this.onLoggedOut();
-        }
-      )
-      .catch(
-        (err) => {
-          console.log(err);
-        }
-      )
-  }
-
-  // handleUpdateProfile(Username, Password, Email, Birthday){
-
-  //   const username = localStorage.getItem('user');
-  //   const token = localStorage.getItem('token');
-  //   console.log('handleUpdateProfile()');
-
-  //   console.log(Username);
-  //   console.log(Password);
-  //   console.log(Email);
-  //   console.log(Birthday);
-
-  //   this.setState({
-  //     profile: {
-  //       Username,
-  //       Password,
-  //       Email,
-  //       Birthday
-  //     }
-  //   })
-
-  //   axios
-  //     .put(
-  //       `https://myflix-20210211.herokuapp.com/users/${username}`,
-  //       {
-  //         headers: {
-  //           Authorization: `Bearer ${token}`
-  //         }
-  //       },
-        
-  //         this.state.profile
-           
-  //     )
-  //     .then(
-  //       (response) => {
-  //         const data = response.data;
-  //         console.log(data);
-  //       }
-  //     )
-  //     .catch(
-  //       (err) => {
-  //         console.log(err);
-  //       }
-  //     )
-
-  // }
 
 
 
@@ -249,7 +171,6 @@ export class MainView extends React.Component {
       movies,
       user,
       userInfo,
-      isLoading
     } = this.state;
 
     // Before the movies have been loaded
@@ -298,7 +219,6 @@ export class MainView extends React.Component {
                         >
                           <MovieCard 
                             movie={movie}
-                            isLoading={isLoading}
                           />
                         </Col>
                       
@@ -387,19 +307,13 @@ export class MainView extends React.Component {
                   <Col sm={12}>
                     <ProfileView
                       userInfo={userInfo}
-                      onUpdateProfile={
-                        () => this.handleUpdateProfile()
-                      }
-                      onDeleteAccount={
-                        (token) => this.handleDeleteAccount(token)
-                      }
+                      onLoggedOut={() => this.onLoggedOut()}
                       movies={movies}
                     />
                   </Col>
                 </Row>
             }
           />
-
         
       </Row>
     </Container>

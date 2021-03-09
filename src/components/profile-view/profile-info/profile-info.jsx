@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import axios from 'axios';
 import moment from 'moment';
 
 import {Link} from 'react-router-dom';
@@ -11,8 +12,7 @@ import Button from 'react-bootstrap/Button';
 
 const ProfileInfo = ({
   userInfo,
-  onUpdateProfile,
-  onDeleteAccount
+  onLoggedOut
 }) => {
 
   const [updateProfile, setUpdateProfile] = useState(false);
@@ -38,7 +38,6 @@ const ProfileInfo = ({
     console.log('handleUpdateProfile()');
 
     e.preventDefault();
-
 
     console.log(Username);
     console.log(Password);
@@ -76,7 +75,35 @@ const ProfileInfo = ({
 
   }
 
+ 
+  const handleDeleteAccount = () => {
 
+    console.log('handleDeleteAccount()');
+    const username = localStorage.getItem('user');
+    const token = localStorage.getItem('token');
+
+    axios
+      .delete(
+        `https://myflix-20210211.herokuapp.com/users/${username}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`
+          } 
+        }
+      )
+      .then(
+        (response) => {
+          const data = response.data;
+          console.log(data)
+          onLoggedOut();
+        }
+      )
+      .catch(
+        (err) => {
+          console.log(err);
+        }
+      )
+  }
 
 
   return (
@@ -225,7 +252,7 @@ const ProfileInfo = ({
         <Button 
           variant="danger"
           onClick={
-            onDeleteAccount 
+            handleDeleteAccount
           }
         >
           Delete My Account
