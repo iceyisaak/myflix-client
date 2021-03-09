@@ -31,10 +31,10 @@ export class ProfileView extends React.Component{
               />
             </Tab>
             <Tab eventKey="favouriteMovie" title="Favourite Movie">
-              {/* <FavouriteMovie
+              <FavouriteMovie
                 userInfo={userInfo}
                 movies={movies}
-              /> */}
+              />
               abc
             </Tab>
             <Tab></Tab>
