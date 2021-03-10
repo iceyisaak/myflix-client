@@ -161,19 +161,22 @@ const ProfileInfo = ({
         </Form.Label>
         <Col sm="10">
           {
-            updateProfile? 
+            updateProfile && 
             <Form.Control
               type="password"
-              defaultValue={userInfo.Password}
+              defaultValue=""
             />
-            :
+          }
+            {
+              !updateProfile &&
             <Form.Control 
               type="password" 
               plaintext 
               readOnly 
-              defaultValue={userInfo.Password}
+              defaultValue="password"
             />
-          }
+            }
+          
         </Col>
       </Form.Group>
 

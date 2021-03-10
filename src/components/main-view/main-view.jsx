@@ -303,7 +303,7 @@ export class MainView extends React.Component {
             render={
               () => 
               
-                <Row className="w-100">
+                <Row className="w-100 h-100">
                   <Col sm={12}>
                     <ProfileView
                       userInfo={userInfo}

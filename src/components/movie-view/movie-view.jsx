@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import axios from 'axios';
 import { Link } from 'react-router-dom';
 
 import Image from 'react-bootstrap/Image'
@@ -13,7 +14,36 @@ export class MovieView extends React.Component{
 
   constructor(){
     super();
-    this.state = {};
+    this.state = {
+    };
+  }
+
+  handleAddToFavourite(movieId){
+    console.log(`handleAddToFavourite(${movieId})`);
+
+    const username = localStorage.getItem('user');
+    const token = localStorage.getItem('token');
+
+    axios
+      .post(
+        `https://myflix-20210211.herokuapp.com/users/${username}/movies/${movieId}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        }
+      )
+      .then(
+        (response) => {
+          const data = response.data;
+          console.log(data);
+        }
+      )
+      .catch(
+        (err) => {
+          console.log(err);
+        }
+      )
   }
 
   render(){
@@ -83,13 +113,22 @@ export class MovieView extends React.Component{
           </Form.Text>
         </Form.Group>
 
+        <Button 
+          variant="primary"
+          className="mt-3"
+          size="lg"
+          onClick={()=>this.handleAddToFavourite(movie._id)}
+          >
+          Add to Favourite
+        </Button>
+        {'   '}
         <Link to={'/'}>
           <Button 
             variant="light"
             className="mt-3"
             size="lg"
             >
-            Back
+            Back to Home
           </Button>
         </Link>
 

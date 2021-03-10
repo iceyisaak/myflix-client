@@ -19,7 +19,7 @@ export class ProfileView extends React.Component{
 
     return(
       
-        <div>
+        <div className="mb-5">
           <Tabs defaultActiveKey="profile">
             <Tab eventKey="profile" title="Profile">
               <ProfileInfo
