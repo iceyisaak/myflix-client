@@ -17,6 +17,10 @@ const ProfileInfo = ({
 
   const [updateProfile, setUpdateProfile] = useState(false);
 
+  const [Username, setUsername] = useState('');
+  const [Password, setPassword] = useState('');
+  const [Email, setEmail] = useState('');
+  const [Birthday, setBirthday] = useState('');
 
   const handleUpdateProfile = () => {
     setUpdateProfile(true);
@@ -26,7 +30,7 @@ const ProfileInfo = ({
     setUpdateProfile(false);
   }
 
-  const handleSaveUpdateProfile = (e, Username, Password, Email, Birthday) => {
+  const handleSaveUpdateProfile = (e) => {
 
     // e.preventDefault();
     // onUpdateProfile(Username, Password, Email, Birthday);
@@ -44,33 +48,55 @@ const ProfileInfo = ({
     console.log(Email);
     console.log(Birthday);
 
-    axios
-      .put(
-        `https://myflix-20210211.herokuapp.com/users/${username}`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`
-          }
-        },
-        {
-          Username,
-          Password,
-          Email,
-          Birthday
-        }
+    // axios
+    //   .put(
+    //     `https://myflix-20210211.herokuapp.com/users/${username}`,
+    //     {
+    //       headers: {
+    //         Authorization: `Bearer ${token}`
+    //       }
+    //     },
+    //     {
+    //       Username,
+    //       Password,
+    //       Email,
+    //       Birthday
+    //     }
           
-      )
-      .then(
-        (response) => {
-          const data = response.data;
-          console.log(data);
-        }
-      )
-      .catch(
-        (err) => {
-          console.log(err);
-        }
-      )
+    //   )
+    //   .then(
+    //     (response) => {
+    //       const data = response.data;
+    //       console.log(data);
+    //     }
+    //   )
+    //   .catch(
+    //     (err) => {
+    //       console.log(err);
+    //     }
+    //   )
+
+    axios({
+			method: 'put',
+			url: `https://myflix-20210211.herokuapp.com/users/${username}`,
+			headers: { Authorization: `Bearer ${token}` },
+			data: {
+				Username,
+        Password,
+        Email,
+        Birthday
+			},
+    })
+    .then((response) => {
+        const data = response.data;
+        console.log(data);
+      }
+    )
+    .catch(
+          (err) => {
+            console.log(err);
+          }
+        )
 
 
   }
@@ -108,7 +134,7 @@ const ProfileInfo = ({
 
   return (
 
-      <Form className="ProfileInfo" >
+      <Form className="ProfileInfo" onSubmit={(e) => handleSaveUpdateProfile(e)}>
         <h1 className="my-5">
             My Profile
         </h1>
@@ -122,6 +148,11 @@ const ProfileInfo = ({
             <Form.Control
               type="text"
               defaultValue={userInfo.Username}
+              onChange={
+                (e) => {
+                  setUsername(e.target.value)
+                }
+              }
             />
             :
             <Form.Control 
@@ -143,6 +174,11 @@ const ProfileInfo = ({
             <Form.Control
               type="email"
               defaultValue={userInfo.Email}
+              onChange={
+                (e) => {
+                  setEmail(e.target.value)
+                }
+              }
             />
             :
             <Form.Control 
@@ -165,6 +201,11 @@ const ProfileInfo = ({
             <Form.Control
               type="password"
               defaultValue=""
+              onChange={
+                (e) => {
+                  setPassword(e.target.value)
+                }
+              }
             />
           }
             {
@@ -192,6 +233,11 @@ const ProfileInfo = ({
               defaultValue={
                 moment(userInfo.Birthday).format('YYYY-MM-DD')
               }
+              onChange={
+                (e) => {
+                  setBirthday(e.target.value)
+                }
+              }
             />
             :
           <Form.Control
@@ -210,9 +256,7 @@ const ProfileInfo = ({
         updateProfile &&
         <div>
           <Button
-            onClick={
-              (e) => handleSaveUpdateProfile(e)
-            }
+           
             type="submit"
             >
             Save Update
