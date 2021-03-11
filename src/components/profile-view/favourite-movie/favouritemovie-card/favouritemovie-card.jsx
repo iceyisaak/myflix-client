@@ -24,6 +24,10 @@ const FavouriteMovieCard = ({
         (response) => {
           const data = response.data;
           console.log(data);
+          window.open(
+            `/users/${username}`,
+            '_self'
+          );
         }
       )
       .catch(
@@ -32,7 +36,7 @@ const FavouriteMovieCard = ({
         }
       )
   }
-  
+
   return (
     <Card
       className="FavouriteMovieCard h-100 mb-5"
