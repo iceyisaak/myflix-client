@@ -16,7 +16,6 @@ const ProfileInfo = ({
 }) => {
 
   const [updateProfile, setUpdateProfile] = useState(false);
-
   const [Username, setUsername] = useState('');
   const [Password, setPassword] = useState('');
   const [Email, setEmail] = useState('');

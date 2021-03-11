@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -10,39 +10,6 @@ const FavouriteMovie = ({
   movies
 }) => {
 
-  const [favMovie, setFavMovie] = useState('');
-  
-  const getFavouriteMovie = () => {
-
-    const username = localStorage.getItem('user');
-    const token = localStorage.getItem('token');
-
-    axios.get(
-      `https://myflix-20210211.herokuapp.com/users/${username}`,
-      {
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
-      }
-    )
-    .then(
-      (response) => {
-        const data = response.data
-        setFavMovie = data.FavouriteMovies
-        console.log(favMovie);
-      }
-    )
-    .catch(
-      (err) => {
-        console.log(err);
-      }
-    )
-  }
-
-  getFavouriteMovie();
-
-  console.log(userInfo);
-
   return (
     <div>
       <h1 className="my-5">Favourite Movies</h1>
@@ -53,10 +20,11 @@ const FavouriteMovie = ({
           </div>
         }
         {
-          userInfo &&
+          userInfo.FavouriteMovies &&
           movies.map(
             (movie) => {
-              if (movie._id === userInfo.FavouriteMovies.find((favMovie) => favMovie === movie._id)) {
+              if (userInfo.FavouriteMovies.find(
+                (favMovie) => favMovie === movie._id)) {
                 return (
                   <Col
                     md={4}
@@ -64,7 +32,7 @@ const FavouriteMovie = ({
                     key={movie._id}
                   >
                   <FavouriteMovieCard
-                    favMovie={favMovie}
+                    movie={movie}
                   />
                 </Col>
                 );

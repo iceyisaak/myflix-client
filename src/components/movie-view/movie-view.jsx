@@ -46,10 +46,12 @@ export class MovieView extends React.Component{
       )
   }
 
+
   render(){
 
     const {
-      movie
+      movie,
+      userInfo
     } = this.props;
 
     if(!movie) return null;
@@ -113,14 +115,37 @@ export class MovieView extends React.Component{
           </Form.Text>
         </Form.Group>
 
-        <Button 
-          variant="primary"
-          className="mt-3"
-          size="lg"
-          onClick={()=>this.handleAddToFavourite(movie._id)}
-          >
-          Add to Favourite
-        </Button>
+        {
+          userInfo.FavouriteMovies &&
+          movies.map(
+            (movie) => {
+              if (userInfo.FavouriteMovies.find(
+                (favMovie) => favMovie === movie._id)) {
+                return (
+                  <Button 
+                  variant="primary"
+                  className="mt-3"
+                  size="lg"
+                  onClick={()=>this.handleRemoveFavourite()}
+                  >
+                  Unfavourite
+                </Button>
+                );
+              }else{
+                return (
+                  <Button 
+                  variant="primary"
+                  className="mt-3"
+                  size="lg"
+                  onClick={()=>this.handleAddToFavourite()}
+                  >
+                  Add to Favourite
+                </Button>
+                )
+              }
+            }
+          )
+        }
         {'   '}
         <Link to={'/'}>
           <Button 

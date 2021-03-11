@@ -1,33 +1,25 @@
 import React, {useState} from 'react';
 import axios from 'axios';
-
 import {Link} from 'react-router-dom';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import Badge from 'react-bootstrap/Badge';
 
 const FavouriteMovieCard = ({
-  // movie
-  favMovie
+  movie
 }) => {
 
-favMovie &&
-  console.log(favMovie);
-
   const handleRemoveFavourite = () => {
-
     const username = localStorage.getItem('user');
     const token = localStorage.getItem('token');
 
-    axios
-      .put(
-        `https://myflix-20210211.herokuapp.com/users/${username}/movies/${movie._id}`,
-        {
-          headers: {
-            Authorization: `Bearer: ${token}`
-          }
+      axios({
+        method: 'put',
+        url: `https://myflix-20210211.herokuapp.com/users/${username}/movies/${movie._id}`,
+        headers: { 
+          Authorization: `Bearer ${token}` 
         }
-      )
+      })
       .then(
         (response) => {
           const data = response.data;
@@ -40,22 +32,21 @@ favMovie &&
         }
       )
   }
-
+  
   return (
-    <Card 
-      className="FavouriteMovieCard h-100 mb-5" 
+    <Card
+      className="FavouriteMovieCard h-100 mb-5"
       key={movie._id}
     >
       <Link
         to={`/movies/${movie._id}`}
-        // className="d-flex flex-column h-100"
       >
-        <Card.Img 
-          variant="top" 
-          src={movie.ImagePath} 
+        <Card.Img
+          variant="top"
+          src={movie.ImagePath}
         />
         </Link>
-      <Card.Body 
+      <Card.Body
         className="d-flex flex-column h-auto"
       >
         <Card.Title>
@@ -67,11 +58,11 @@ favMovie &&
           >
           {movie.Genre.Name}
         </Badge>
-        <Button 
-          size="sm" 
-          block 
-          className="mt-auto" 
-          variant="outline-danger" 
+        <Button
+          size="sm"
+          block
+          className="mt-auto"
+          variant="outline-danger"
           onClick={(e) => handleRemoveFavourite(e, movie._id)}
           >
             Unfavorite
@@ -80,5 +71,4 @@ favMovie &&
     </Card>
   )
 }
-
 export default FavouriteMovieCard;
