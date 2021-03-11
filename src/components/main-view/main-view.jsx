@@ -307,7 +307,7 @@ export class MainView extends React.Component {
                   <Col sm={12}>
                     <ProfileView
                       userInfo={userInfo}
-                      onLoggedOut={() => this.onLoggedOut()}
+                      onLoggedOut={this.onLoggedOut}
                       movies={movies}
                     />
                   </Col>

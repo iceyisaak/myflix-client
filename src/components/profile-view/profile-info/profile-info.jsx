@@ -32,54 +32,17 @@ const ProfileInfo = ({
 
   const handleSaveUpdateProfile = (e) => {
 
-    // e.preventDefault();
-    // onUpdateProfile(Username, Password, Email, Birthday);
-    // console.log(Username);
-    // setUpdateProfile(false);
-
+    e.preventDefault();
     const username = localStorage.getItem('user');
     const token = localStorage.getItem('token');
     console.log('handleUpdateProfile()');
 
-    e.preventDefault();
-
-    console.log(Username);
-    console.log(Password);
-    console.log(Email);
-    console.log(Birthday);
-
-    // axios
-    //   .put(
-    //     `https://myflix-20210211.herokuapp.com/users/${username}`,
-    //     {
-    //       headers: {
-    //         Authorization: `Bearer ${token}`
-    //       }
-    //     },
-    //     {
-    //       Username,
-    //       Password,
-    //       Email,
-    //       Birthday
-    //     }
-          
-    //   )
-    //   .then(
-    //     (response) => {
-    //       const data = response.data;
-    //       console.log(data);
-    //     }
-    //   )
-    //   .catch(
-    //     (err) => {
-    //       console.log(err);
-    //     }
-    //   )
-
     axios({
 			method: 'put',
 			url: `https://myflix-20210211.herokuapp.com/users/${username}`,
-			headers: { Authorization: `Bearer ${token}` },
+			headers: { 
+        Authorization: `Bearer ${token}` 
+      },
 			data: {
 				Username,
         Password,
@@ -93,15 +56,15 @@ const ProfileInfo = ({
       }
     )
     .catch(
-          (err) => {
-            console.log(err);
-          }
-        )
+      (err) => {
+        console.log(err);
+      }
+    )
 
-
+    onLoggedOut();
   }
 
- 
+
   const handleDeleteAccount = () => {
 
     console.log('handleDeleteAccount()');
@@ -256,7 +219,6 @@ const ProfileInfo = ({
         updateProfile &&
         <div>
           <Button
-           
             type="submit"
             >
             Save Update

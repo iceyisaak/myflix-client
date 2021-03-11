@@ -34,9 +34,10 @@ export class ProfileView extends React.Component{
                 movies={movies}
               />
             </Tab>
-            <Tab></Tab>
           </Tabs>
         </div>
+
+      
 
     );
   }
