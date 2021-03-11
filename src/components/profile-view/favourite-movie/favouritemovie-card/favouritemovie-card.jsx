@@ -13,28 +13,28 @@ const FavouriteMovieCard = ({
     const username = localStorage.getItem('user');
     const token = localStorage.getItem('token');
 
-      axios({
-        method: 'put',
-        url: `https://myflix-20210211.herokuapp.com/users/${username}/movies/${movie._id}`,
-        headers: { 
-          Authorization: `Bearer ${token}` 
-        }
-      })
-      .then(
-        (response) => {
-          const data = response.data;
-          console.log(data);
-          window.open(
-            `/users/${username}`,
-            '_self'
-          );
-        }
-      )
-      .catch(
-        (err) => {
-          console.log(err);
-        }
-      )
+    axios({
+      method: 'put',
+      url: `https://myflix-20210211.herokuapp.com/users/${username}/movies/${movie._id}`,
+      headers: { 
+        Authorization: `Bearer ${token}` 
+      }
+    })
+    .then(
+      (response) => {
+        const data = response.data;
+        console.log(data);
+        window.open(
+          `/users/${username}`,
+          '_self'
+        );
+      }
+    )
+    .catch(
+      (err) => {
+        console.log(err);
+      }
+    )
   }
 
   return (

@@ -24,15 +24,13 @@ export class MovieView extends React.Component{
     const username = localStorage.getItem('user');
     const token = localStorage.getItem('token');
 
-    axios
-      .post(
-        `https://myflix-20210211.herokuapp.com/users/${username}/movies/${movieId}`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`
-          }
-        }
-      )
+    axios({
+      method: 'post',
+      url:`https://myflix-20210211.herokuapp.com/users/${username}/movies/${movieId}`,
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    })
       .then(
         (response) => {
           const data = response.data;
@@ -45,7 +43,34 @@ export class MovieView extends React.Component{
         }
       )
   }
+  
+  handleRemoveFavourite(){
+    const username = localStorage.getItem('user');
+    const token = localStorage.getItem('token');
 
+    axios({
+      method: 'put',
+      url: `https://myflix-20210211.herokuapp.com/users/${username}/movies/${movie._id}`,
+      headers: { 
+        Authorization: `Bearer ${token}` 
+      }
+    })
+    .then(
+      (response) => {
+        const data = response.data;
+        console.log(data);
+        window.open(
+          `/users/${username}`,
+          '_self'
+        );
+      }
+    )
+    .catch(
+      (err) => {
+        console.log(err);
+      }
+    )
+  }
 
   render(){
 
@@ -115,7 +140,7 @@ export class MovieView extends React.Component{
           </Form.Text>
         </Form.Group>
 
-        {
+        {/* {
           userInfo.FavouriteMovies &&
           movies.map(
             (movie) => {
@@ -145,7 +170,30 @@ export class MovieView extends React.Component{
               }
             }
           )
-        }
+        } */}
+
+            <Form.Group>
+              {userInfo.FavouriteMovies.find((favMovie) => favMovie === movie._id) ?
+                <Button
+                  variant="primary"
+                  className="mt-3"
+                  size="lg"
+                  onClick={()=>this.handleRemoveFavourite()}
+                  >
+                    Unfavourite
+                </Button>
+              :
+                <Button
+                  variant="primary"
+                  className="mt-3"
+                  size="lg"
+                  onClick={()=>this.handleAddToFavourite()}
+                  >
+                  Add to Favourite
+                </Button>
+              }
+            </Form.Group>
+
         {'   '}
         <Link to={'/'}>
           <Button 

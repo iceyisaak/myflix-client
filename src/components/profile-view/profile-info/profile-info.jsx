@@ -52,6 +52,12 @@ const ProfileInfo = ({
     .then((response) => {
         const data = response.data;
         console.log(data);
+        localStorage.removeItem('token');
+        localStorage.removeItem('user');
+        window.open(
+          '/',
+          '_self'
+        );
       }
     )
     .catch(
@@ -60,7 +66,7 @@ const ProfileInfo = ({
       }
     )
 
-    onLoggedOut();
+    
   }
 
 
