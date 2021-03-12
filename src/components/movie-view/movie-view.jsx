@@ -15,7 +15,7 @@ export class MovieView extends React.Component{
   constructor(){
     super();
     this.state = {
-      favourited: null
+      favourited: false
     };
   }
 
@@ -78,6 +78,21 @@ export class MovieView extends React.Component{
     )
   }
 
+  componentDidMount(){
+ 
+  if(
+    this.props.userInfo.FavouriteMovies.find(
+      (favMovie) => favMovie === this.props.movie._id
+    )
+  ){
+
+    this.setState({
+      favourited: true
+    })
+
+}
+  }
+
   render(){
 
     const {
@@ -88,21 +103,7 @@ export class MovieView extends React.Component{
     if(!movie) return null;
 
     
-    if(
-      userInfo.FavouriteMovies.find((favMovie) => favMovie === movie._id)
-    ){
 
-      this.setState({
-        favourited: true
-      })
-
-      }else{
-        
-      this.setState({
-        favourited: false
-      })
-  
-    }
 
 
     return (
