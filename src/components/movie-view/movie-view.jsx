@@ -15,8 +15,20 @@ export class MovieView extends React.Component{
   constructor(){
     super();
     this.state = {
+      favourited: null
     };
   }
+
+  // userInfo.FavouriteMovies.find((favMovie) => favMovie === movie._id) ? (
+  //   this.setState({
+  //     favourited: true
+  //   })
+  // ):(
+  //   this.setState({
+  //     favourited: false
+  //   })
+  // )
+
 
   handleAddToFavourite(movieId){
     console.log(`handleAddToFavourite(${movieId})`);
@@ -35,6 +47,9 @@ export class MovieView extends React.Component{
         (response) => {
           const data = response.data;
           console.log(data);
+          this.setState({
+            favourited: true
+          })
         }
       )
       .catch(
@@ -59,10 +74,9 @@ export class MovieView extends React.Component{
       (response) => {
         const data = response.data;
         console.log(data);
-        window.open(
-          `/users/${username}`,
-          '_self'
-        );
+        this.setState({
+          favourited: false
+        })
       }
     )
     .catch(
@@ -173,21 +187,22 @@ export class MovieView extends React.Component{
         } */}
 
             <Form.Group>
-              {userInfo.FavouriteMovies.find((favMovie) => favMovie === movie._id) ?
+              { this.state.favourited &&
                 <Button
-                  variant="primary"
+                  variant="outline-danger"
                   className="mt-3"
                   size="lg"
                   onClick={()=>this.handleRemoveFavourite()}
                   >
                     Unfavourite
                 </Button>
-              :
+              }
+              { !this.state.favourited &&
                 <Button
                   variant="primary"
                   className="mt-3"
                   size="lg"
-                  onClick={()=>this.handleAddToFavourite()}
+                  onClick={()=>this.handleAddToFavourite(movie._id)}
                   >
                   Add to Favourite
                 </Button>

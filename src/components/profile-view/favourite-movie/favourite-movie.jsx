@@ -14,7 +14,7 @@ const FavouriteMovie = ({
     <div>
       <h1 className="my-5">Favourite Movies</h1>
       <Row>
-        {!userInfo && 
+        {!userInfo.FavouriteMovies && 
           <div>
             No Favourite Movie
           </div>
