@@ -19,15 +19,7 @@ export class MovieView extends React.Component{
     };
   }
 
-  // userInfo.FavouriteMovies.find((favMovie) => favMovie === movie._id) ? (
-  //   this.setState({
-  //     favourited: true
-  //   })
-  // ):(
-  //   this.setState({
-  //     favourited: false
-  //   })
-  // )
+
 
 
   handleAddToFavourite(movieId){
@@ -95,6 +87,24 @@ export class MovieView extends React.Component{
 
     if(!movie) return null;
 
+    
+    if(
+      userInfo.FavouriteMovies.find((favMovie) => favMovie === movie._id)
+    ){
+
+      this.setState({
+        favourited: true
+      })
+
+      }else{
+        
+      this.setState({
+        favourited: false
+      })
+  
+    }
+
+
     return (
 
       <div>
@@ -154,60 +164,28 @@ export class MovieView extends React.Component{
           </Form.Text>
         </Form.Group>
 
-        {/* {
-          userInfo.FavouriteMovies &&
-          movies.map(
-            (movie) => {
-              if (userInfo.FavouriteMovies.find(
-                (favMovie) => favMovie === movie._id)) {
-                return (
-                  <Button 
-                  variant="primary"
-                  className="mt-3"
-                  size="lg"
-                  onClick={()=>this.handleRemoveFavourite()}
-                  >
-                  Unfavourite
-                </Button>
-                );
-              }else{
-                return (
-                  <Button 
-                  variant="primary"
-                  className="mt-3"
-                  size="lg"
-                  onClick={()=>this.handleAddToFavourite()}
-                  >
-                  Add to Favourite
-                </Button>
-                )
-              }
-            }
-          )
-        } */}
-
-            <Form.Group>
-              { this.state.favourited &&
-                <Button
-                  variant="outline-danger"
-                  className="mt-3"
-                  size="lg"
-                  onClick={()=>this.handleRemoveFavourite()}
-                  >
-                    Unfavourite
-                </Button>
-              }
-              { !this.state.favourited &&
-                <Button
-                  variant="primary"
-                  className="mt-3"
-                  size="lg"
-                  onClick={()=>this.handleAddToFavourite(movie._id)}
-                  >
-                  Add to Favourite
-                </Button>
-              }
-            </Form.Group>
+        <Form.Group>
+          { this.state.favourited &&
+            <Button
+              variant="outline-danger"
+              className="mt-3"
+              size="lg"
+              onClick={()=>this.handleRemoveFavourite()}
+              >
+                Unfavourite
+            </Button>
+          }
+          { !this.state.favourited &&
+            <Button
+              variant="primary"
+              className="mt-3"
+              size="lg"
+              onClick={()=>this.handleAddToFavourite(movie._id)}
+              >
+              Add to Favourite
+            </Button>
+          }
+        </Form.Group>
 
         {'   '}
         <Link to={'/'}>
