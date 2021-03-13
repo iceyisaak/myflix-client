@@ -20,8 +20,6 @@ export class MovieView extends React.Component{
   }
 
 
-
-
   handleAddToFavourite(movieId){
     console.log(`handleAddToFavourite(${movieId})`);
 
@@ -51,13 +49,13 @@ export class MovieView extends React.Component{
       )
   }
   
-  handleRemoveFavourite(){
+  handleRemoveFavourite(movieId){
     const username = localStorage.getItem('user');
     const token = localStorage.getItem('token');
 
     axios({
       method: 'put',
-      url: `https://myflix-20210211.herokuapp.com/users/${username}/movies/${movie._id}`,
+      url: `https://myflix-20210211.herokuapp.com/users/${username}/movies/${movieId}`,
       headers: { 
         Authorization: `Bearer ${token}` 
       }
@@ -69,6 +67,7 @@ export class MovieView extends React.Component{
         this.setState({
           favourited: false
         })
+       
       }
     )
     .catch(
@@ -79,18 +78,18 @@ export class MovieView extends React.Component{
   }
 
   componentDidMount(){
- 
-  if(
-    this.props.userInfo.FavouriteMovies.find(
-      (favMovie) => favMovie === this.props.movie._id
-    )
-  ){
 
-    this.setState({
-      favourited: true
-    })
+    if(
+      this.props.userInfo.FavouriteMovies.find(
+        (favMovie) => favMovie === this.props.movie._id
+      )
+    ){
 
-}
+      this.setState({
+        favourited: true
+      })
+
+    }
   }
 
   render(){
@@ -103,9 +102,6 @@ export class MovieView extends React.Component{
     if(!movie) return null;
 
     
-
-
-
     return (
 
       <div>
@@ -171,7 +167,7 @@ export class MovieView extends React.Component{
               variant="outline-danger"
               className="mt-3"
               size="lg"
-              onClick={()=>this.handleRemoveFavourite()}
+              onClick={()=>this.handleRemoveFavourite(movie._id)}
               >
                 Unfavourite
             </Button>
