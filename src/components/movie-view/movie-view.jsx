@@ -21,8 +21,6 @@ export class MovieView extends React.Component{
 
 
   handleAddToFavourite(movieId){
-    console.log(`handleAddToFavourite(${movieId})`);
-
     const username = localStorage.getItem('user');
     const token = localStorage.getItem('token');
 
@@ -66,8 +64,7 @@ export class MovieView extends React.Component{
         console.log(data);
         this.setState({
           favourited: false
-        })
-       
+        })   
       }
     )
     .catch(
