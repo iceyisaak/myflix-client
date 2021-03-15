@@ -40,7 +40,7 @@ const ProfileInfo = ({
 			method: 'put',
 			url: `https://myflix-20210211.herokuapp.com/users/${username}`,
 			headers: { 
-        Authorization: `Bearer ${token}` 
+        Authorization: `Bearer ${token}`
       },
 			data: {
 				Username,
