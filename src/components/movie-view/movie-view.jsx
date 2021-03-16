@@ -14,9 +14,9 @@ export class MovieView extends React.Component{
 
   constructor(){
     super();
-    this.state = {
-      favourited: false
-    };
+    // this.state = {
+    //   favourited: false
+    // };
   }
 
 
@@ -38,6 +38,10 @@ export class MovieView extends React.Component{
           this.setState({
             favourited: true
           })
+          window.open(
+            `/movies/${movieId}`,
+            '_self'
+          );
         }
       )
       .catch(
@@ -64,7 +68,11 @@ export class MovieView extends React.Component{
         console.log(data);
         this.setState({
           favourited: false
-        })   
+        })
+        window.open(
+          `/movies/${movieId}`,
+          '_self'
+        );   
       }
     )
     .catch(
@@ -74,20 +82,20 @@ export class MovieView extends React.Component{
     )
   }
 
-  componentDidMount(){
+  // componentDidMount(){
 
-    if(
-      this.props.userInfo.FavouriteMovies.find(
-        (favMovie) => favMovie === this.props.movie._id
-      )
-    ){
+  //   if(
+  //     this.props.userInfo.FavouriteMovies.find(
+  //       (favMovie) => favMovie === this.props.movie._id
+  //     )
+  //   ){
 
-      this.setState({
-        favourited: true
-      })
+  //     this.setState({
+  //       favourited: true
+  //     })
 
-    }
-  }
+  //   }
+  // }
 
   render(){
 
@@ -96,8 +104,10 @@ export class MovieView extends React.Component{
       userInfo
     } = this.props;
 
-    if(!movie) return null;
+    console.log('MovieView props:', this.props);
+    console.log('MovieView state:', this.state);
 
+    if(!movie) return null;
     
     return (
 
@@ -159,25 +169,28 @@ export class MovieView extends React.Component{
         </Form.Group>
 
         <Form.Group>
-          { this.state.favourited &&
-            <Button
-              variant="outline-danger"
-              className="mt-3"
-              size="lg"
-              onClick={()=>this.handleRemoveFavourite(movie._id)}
-              >
-                Unfavourite
-            </Button>
-          }
-          { !this.state.favourited &&
-            <Button
-              variant="primary"
-              className="mt-3"
-              size="lg"
-              onClick={()=>this.handleAddToFavourite(movie._id)}
-              >
-              Add to Favourite
-            </Button>
+          {
+            this.props.userInfo.FavouriteMovies.find(
+                (favMovie) => favMovie === this.props.movie._id
+              )
+            ?
+              <Button
+                variant="outline-danger"
+                className="mt-3"
+                size="lg"
+                onClick={()=>this.handleRemoveFavourite(movie._id)}
+                >
+                  Unfavourite
+              </Button>
+            :
+              <Button
+                variant="primary"
+                className="mt-3"
+                size="lg"
+                onClick={()=>this.handleAddToFavourite(movie._id)}
+                >
+                Add to Favourite
+              </Button>
           }
         </Form.Group>
 
