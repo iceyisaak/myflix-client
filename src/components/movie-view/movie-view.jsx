@@ -22,7 +22,7 @@ export class MovieView extends React.Component{
   checkIsFavourited(){
     const username = localStorage.getItem('user');
     const token = localStorage.getItem('token');
-    console.log('checkIsFavourited()');
+    // console.log('checkIsFavourited()');
     axios.get({
       method: 'get',
       url:`https://myflix-20210211.herokuapp.com/users/${username}`,
@@ -33,8 +33,8 @@ export class MovieView extends React.Component{
     })
     .then(
       (response) => {
-        const data = console.log(response.data);
-        console.log(data.Username);
+        // const data = console.log(response.data);
+        // console.log(data.Username);
       }
     )
     .catch(
@@ -61,7 +61,7 @@ export class MovieView extends React.Component{
       .then(
         (response) => {
           const data = response.data;
-          console.log(data);
+          // console.log(data);
           this.setState({
             favourited: true
           })
@@ -91,8 +91,8 @@ export class MovieView extends React.Component{
     })
     .then(
       (response) => {
-        // const data = response.data;
-        console.log(data);
+        const movie = response.data;
+        // console.log(data);
         this.setState({
           movies: response.data,
           favourited: false
@@ -125,7 +125,7 @@ export class MovieView extends React.Component{
     // }
     const username = localStorage.getItem('user');
     const token = localStorage.getItem('token');
-    console.log('getMovie in <MovieView/>');
+    // console.log('getMovie in <MovieView/>');
 
     axios.get({
       method:'get',
@@ -136,8 +136,8 @@ export class MovieView extends React.Component{
     })
     .then(
       (response) => {
-        const data = response.data;
-        console.log(data);
+        const movie = response.data;
+        // console.log(movie);
       }
     )
     .catch(
@@ -155,9 +155,10 @@ export class MovieView extends React.Component{
       movie,
       userInfo
     } = this.props;
-
-    console.log('MovieView props:', this.props);
-    console.log('MovieView state:', this.state);
+    console.log(movie);
+    console.log(userInfo);
+    // console.log('MovieView props:', this.props);
+    // console.log('MovieView state:', this.state);
 
     if(!movie) return null;
     
@@ -222,7 +223,7 @@ export class MovieView extends React.Component{
 
         <Form.Group>
           {/* {
-            this.props.userInfo.FavouriteMovies.find(
+            userInfo.FavouriteMovies.find(
                 (favMovie) => favMovie === this.props.movie._id
               )
             ?
