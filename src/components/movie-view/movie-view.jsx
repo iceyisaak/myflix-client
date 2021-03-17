@@ -1,6 +1,7 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import axios from 'axios';
+
 import { Link } from 'react-router-dom';
 
 import Image from 'react-bootstrap/Image'
@@ -156,15 +157,15 @@ export class MovieView extends React.Component{
 
 render(){
   
-    // const movieId = this.props.match;
-    const {
-      movie
-    } = this.props;
+    const movieId = this.props.match.params.movieId;
+    // const {
+    //   movie
+    // } = this.props;
 
     console.log('MovieView props:', this.props);
     console.log('MovieView state:', this.state);
 
-    if(!movie) return null;
+    // if(!movie) return null;
     
     return (
 
@@ -270,17 +271,17 @@ render(){
 
 }
 
-MovieView.propTypes = {
+// MovieView.propTypes = {
 
-  movie: PropTypes.shape({
-    Title: PropTypes.string.isRequired,
-    Description: PropTypes.string.isRequired,
-    ImagePath: PropTypes.string.isRequired,
-    Genre: PropTypes.shape({
-      Name: PropTypes.string
-    }),
-    Director: PropTypes.shape({
-      Name: PropTypes.string
-    })
-  }).isRequired
-}
+//   movie: PropTypes.shape({
+//     Title: PropTypes.string.isRequired,
+//     Description: PropTypes.string.isRequired,
+//     ImagePath: PropTypes.string.isRequired,
+//     Genre: PropTypes.shape({
+//       Name: PropTypes.string
+//     }),
+//     Director: PropTypes.shape({
+//       Name: PropTypes.string
+//     })
+//   }).isRequired
+// }
