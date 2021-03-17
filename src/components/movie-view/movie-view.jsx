@@ -91,9 +91,10 @@ export class MovieView extends React.Component{
     })
     .then(
       (response) => {
-        const data = response.data;
+        // const data = response.data;
         console.log(data);
         this.setState({
+          movies: response.data,
           favourited: false
         })
         window.open(
