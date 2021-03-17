@@ -214,7 +214,7 @@ export class MovieView extends React.Component{
 
         <Form.Group>
           {
-            userInfo.FavouriteMovies.find(
+            this.props.userInfo.FavouriteMovies.find(
                 (favMovie) => favMovie === this.props.movie._id
               )
             ?
