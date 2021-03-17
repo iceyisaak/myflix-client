@@ -249,6 +249,7 @@ export class MainView extends React.Component {
                         (movie) => movie._id === match.params.movieId
                       )
                     }
+                    userInfo={userInfo}
                   />
               </Col>
             }

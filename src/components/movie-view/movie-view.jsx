@@ -33,7 +33,7 @@ export class MovieView extends React.Component{
     })
     .then(
       (response) => {
-        // const data = console.log(response.data);
+        const data = console.log(response.data);
         // console.log(data.Username);
       }
     )
@@ -222,7 +222,7 @@ export class MovieView extends React.Component{
         </Form.Group>
 
         <Form.Group>
-          {/* {
+          {
             userInfo.FavouriteMovies.find(
                 (favMovie) => favMovie === this.props.movie._id
               )
@@ -244,7 +244,7 @@ export class MovieView extends React.Component{
                 >
                 Add to Favourite
               </Button>
-          } */}
+          }
         </Form.Group>
 
         {'   '}
