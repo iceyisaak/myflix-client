@@ -21,6 +21,8 @@ const ProfileInfo = ({
   const [Email, setEmail] = useState('');
   const [Birthday, setBirthday] = useState('');
 
+  const [validated, setValidated] = useState(false);
+
   const handleUpdateProfile = () => {
     setUpdateProfile(true);
   }
@@ -32,6 +34,14 @@ const ProfileInfo = ({
   const handleSaveUpdateProfile = (e) => {
 
     e.preventDefault();
+
+    const form = e.currentTarget;
+    if(form.checkValidity() === false){
+      e.stopPropagation();
+    }
+
+    setValidated(true);
+
     const username = localStorage.getItem('user');
     const token = localStorage.getItem('token');
     console.log('handleUpdateProfile()');
@@ -102,7 +112,12 @@ const ProfileInfo = ({
 
   return (
 
-      <Form className="ProfileInfo" onSubmit={(e) => handleSaveUpdateProfile(e)}>
+      <Form 
+        noValidate
+        validated={validated}
+        className="ProfileInfo" 
+        onSubmit={(e) => handleSaveUpdateProfile(e)}
+      >
         <h1 className="my-5">
             My Profile
         </h1>
@@ -113,15 +128,24 @@ const ProfileInfo = ({
         <Col sm="10">
           {
             updateProfile? 
-            <Form.Control
-              type="text"
-              defaultValue={userInfo.Username}
-              onChange={
-                (e) => {
-                  setUsername(e.target.value)
+            <div>
+
+              <Form.Control
+                required
+                type="text"
+                defaultValue={userInfo.Username}
+                onChange={
+                  (e) => {
+                    setUsername(e.target.value)
+                  }
                 }
-              }
-            />
+                />
+              <Form.Control.Feedback
+                type="invalid"
+              >
+                Username must have at least 6 characters
+              </Form.Control.Feedback>
+            </div>
             :
             <Form.Control 
               plaintext 
@@ -139,7 +163,10 @@ const ProfileInfo = ({
         <Col sm="10">
           {
             updateProfile? 
+            <div>
+
             <Form.Control
+              required
               type="email"
               defaultValue={userInfo.Email}
               onChange={
@@ -148,6 +175,12 @@ const ProfileInfo = ({
                 }
               }
             />
+            <Form.Control.Feedback
+              type="invalid"
+            >
+              Email must have a valid format
+            </Form.Control.Feedback>
+            </div>
             :
             <Form.Control 
               type="email" 
@@ -166,6 +199,8 @@ const ProfileInfo = ({
         <Col sm="10">
           {
             updateProfile && 
+            <div>
+
             <Form.Control
               type="password"
               defaultValue=""
@@ -174,7 +209,13 @@ const ProfileInfo = ({
                   setPassword(e.target.value)
                 }
               }
-            />
+              />
+              <Form.Control.Feedback
+                type="invalid"
+              >
+                Password must have at least 6 characters
+              </Form.Control.Feedback>
+            </div>
           }
             {
               !updateProfile &&
@@ -196,6 +237,8 @@ const ProfileInfo = ({
         <Col sm="10">
           {
             updateProfile?
+            <div>
+
             <Form.Control
               type="date"
               defaultValue={
@@ -206,7 +249,13 @@ const ProfileInfo = ({
                   setBirthday(e.target.value)
                 }
               }
-            />
+              />
+              <Form.Control.Feedback
+                type="invalid"
+              >
+                Please enter your Date of Birth
+              </Form.Control.Feedback>
+            </div>
             :
           <Form.Control
           type="date"

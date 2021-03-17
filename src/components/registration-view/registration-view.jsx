@@ -13,11 +13,20 @@ export function RegistrationView (props) {
   const [email, setEmail] = useState('');
   const [birthday, setBirthday] = useState('');
 
+  const [validated, setValidated] = useState(false);
 
   const handleRegister = (e) => {
-
+    
     // prevent page refresh
     e.preventDefault();
+
+    // validate input
+    const form = e.currentTarget;
+    if(form.checkValidity() === false){
+      e.stopPropagation();
+    }
+
+    setValidated(true);
 
     axios
       .post(
@@ -49,7 +58,11 @@ export function RegistrationView (props) {
 
   return(
 
-    <Form>
+    <Form
+      noValidate
+      validated={validated}
+      onSubmit={handleRegister}
+    >
       <Form.Group controlId="formUsername">
       <h1 className="h1">
         Join Now!
@@ -58,6 +71,7 @@ export function RegistrationView (props) {
           Username:
         </Form.Label>
         <Form.Control
+          required
           type="text"
           value={username}
           onChange={
@@ -66,6 +80,11 @@ export function RegistrationView (props) {
             }
           }
         />
+        <Form.Control.Feedback
+          type="invalid"
+        >
+          Username must have at least 6 characters
+        </Form.Control.Feedback>
       </Form.Group>
 
       <Form.Group controlId="formPassword">
@@ -73,6 +92,7 @@ export function RegistrationView (props) {
             Password:
           </Form.Label>
           <Form.Control
+            required
             type="password"
             value={password}
             onChange={
@@ -81,6 +101,11 @@ export function RegistrationView (props) {
               }
             }
           />
+        <Form.Control.Feedback
+          type="invalid"
+        >
+          Password must have at least 6 characters
+        </Form.Control.Feedback>
       </Form.Group>
 
       <Form.Group controlId="formEmail">
@@ -88,6 +113,7 @@ export function RegistrationView (props) {
             Email:
           </Form.Label>
           <Form.Control
+            required
             type="email"
             value={email}
             onChange={
@@ -96,6 +122,11 @@ export function RegistrationView (props) {
               }
             }
           />
+          <Form.Control.Feedback
+            type="invalid"
+          >
+            Email must have a valid format
+          </Form.Control.Feedback>
       </Form.Group>
 
       <Form.Group controlId="formBirthday">
@@ -104,6 +135,7 @@ export function RegistrationView (props) {
           Birthday:
         </Form.Label>
         <Form.Control
+          required
           type="date"
           value={birthday}
           onChange={
@@ -112,6 +144,11 @@ export function RegistrationView (props) {
             }
           }
         />
+        <Form.Control.Feedback
+          type="invalid"
+        >
+          Please enter your Date of Birth
+        </Form.Control.Feedback>
       </Form.Group>
      
         <Button
@@ -136,7 +173,6 @@ export function RegistrationView (props) {
           </Button>
         </Link>
       </Form.Group>
-    
     </Form>
   )
 }

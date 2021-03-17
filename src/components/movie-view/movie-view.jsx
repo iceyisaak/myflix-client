@@ -14,9 +14,35 @@ export class MovieView extends React.Component{
 
   constructor(){
     super();
-    // this.state = {
-    //   favourited: false
-    // };
+    this.state = {
+      // favourited: false
+      movie: null
+    };
+  }
+
+  checkIsFavourited(){
+    const username = localStorage.getItem('user');
+    const token = localStorage.getItem('token');
+    console.log('checkIsFavourited()');
+    axios.get({
+      method: 'get',
+      url:`https://myflix-20210211.herokuapp.com/users/${username}`,
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+
+    })
+    .then(
+      (response) => {
+        const data = console.log(response.data);
+        console.log(data.Username);
+      }
+    )
+    .catch(
+      (err) => {
+        console.log(err);
+      }
+    )
   }
 
 
@@ -82,26 +108,40 @@ export class MovieView extends React.Component{
     )
   }
 
-  // componentDidMount(){
+  componentDidMount(movieId){
 
-  //   if(
-  //     this.props.userInfo.FavouriteMovies.find(
-  //       (favMovie) => favMovie === this.props.movie._id
-  //     )
-  //   ){
+    const username = localStorage.getItem('user');
+    const token = localStorage.getItem('token');
+    console.log('getMovie in <MovieView/>');
 
-  //     this.setState({
-  //       favourited: true
-  //     })
+    axios.get({
+      method:'get',
+      url: `https://myflix-20210211.herokuapp.com/movies/${movieId}`,
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    })
+    .then(
+      (response) => {
+        console.log(data);
+        this.setState({
+          movie: response.data
+        })
+      }
+    )
+    .catch(
+      (err) => {
+        console.log(err);
+      }
+    )
 
-  //   }
-  // }
+    this.checkIsFavourited();
+  }
 
   render(){
 
     const {
-      movie,
-      userInfo
+      movieId
     } = this.props;
 
     console.log('MovieView props:', this.props);
@@ -116,7 +156,7 @@ export class MovieView extends React.Component{
           <Breadcrumb.Item href="/">
             Home
           </Breadcrumb.Item>
-          <Breadcrumb.Item href={`/movies/${movie._id}`}>
+          <Breadcrumb.Item href={`/movies/${movieId._id}`}>
             {movie.Title}
           </Breadcrumb.Item>
         </Breadcrumb>
@@ -169,7 +209,7 @@ export class MovieView extends React.Component{
         </Form.Group>
 
         <Form.Group>
-          {
+          {/* {
             this.props.userInfo.FavouriteMovies.find(
                 (favMovie) => favMovie === this.props.movie._id
               )
@@ -191,7 +231,7 @@ export class MovieView extends React.Component{
                 >
                 Add to Favourite
               </Button>
-          }
+          } */}
         </Form.Group>
 
         {'   '}

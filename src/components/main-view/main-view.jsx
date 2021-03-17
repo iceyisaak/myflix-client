@@ -244,12 +244,11 @@ export class MainView extends React.Component {
                 className="mb-5"
               >
                   <MovieView
-                    movie={
+                    movieId={
                       movies.find(
                         (movie) => movie._id === match.params.movieId
                       )
                     }
-                    userInfo={userInfo}
                   />
               </Col>
             }
