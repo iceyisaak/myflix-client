@@ -14,10 +14,9 @@ export class MovieView extends React.Component{
 
   constructor(){
     super();
-    this.state = {
-      // favourited: false
-      movie: null
-    };
+    // this.state = {
+    //   favourited: false
+    // };
   }
 
   checkIsFavourited(){
@@ -43,6 +42,8 @@ export class MovieView extends React.Component{
         console.log(err);
       }
     )
+
+
   }
 
 
@@ -110,6 +111,17 @@ export class MovieView extends React.Component{
 
   componentDidMount(movieId){
 
+    // if(
+    //   this.props.userInfo.FavouriteMovies.find(
+    //     (favMovie) => favMovie === this.props.movie._id
+    //   )
+    // ){
+
+    //   this.setState({
+    //     favourited: true
+    //   })
+
+    // }
     const username = localStorage.getItem('user');
     const token = localStorage.getItem('token');
     console.log('getMovie in <MovieView/>');
@@ -123,10 +135,8 @@ export class MovieView extends React.Component{
     })
     .then(
       (response) => {
+        const data = response.data;
         console.log(data);
-        this.setState({
-          movie: response.data
-        })
       }
     )
     .catch(
@@ -141,7 +151,8 @@ export class MovieView extends React.Component{
   render(){
 
     const {
-      movieId
+      movie,
+      userInfo
     } = this.props;
 
     console.log('MovieView props:', this.props);
@@ -156,7 +167,7 @@ export class MovieView extends React.Component{
           <Breadcrumb.Item href="/">
             Home
           </Breadcrumb.Item>
-          <Breadcrumb.Item href={`/movies/${movieId._id}`}>
+          <Breadcrumb.Item href={`/movies/${movie._id}`}>
             {movie.Title}
           </Breadcrumb.Item>
         </Breadcrumb>
