@@ -1,7 +1,6 @@
 import React from 'react';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import axios from 'axios';
-
 import { Link } from 'react-router-dom';
 
 import Image from 'react-bootstrap/Image'
@@ -110,38 +109,56 @@ export class MovieView extends React.Component{
     )
   }
 
-  componentDidMount(){
+  componentDidMount(movieId){
 
-  //   if(
-  //     this.props.userInfo.FavouriteMovies.find(
-  //       (favMovie) => favMovie === this.props.movie._id
-  //     )
-  //   ){
+    // if(
+    //   this.props.userInfo.FavouriteMovies.find(
+    //     (favMovie) => favMovie === this.props.movie._id
+    //   )
+    // ){
 
-  //     this.setState({
-  //       favourited: true
-  //     })
+    //   this.setState({
+    //     favourited: true
+    //   })
 
-  //   }
-  // }
+    // }
+    const username = localStorage.getItem('user');
+    const token = localStorage.getItem('token');
+    console.log('getMovie in <MovieView/>');
 
-  
-  this.checkIsFavourited();
-}
+    axios.get({
+      method:'get',
+      url: `https://myflix-20210211.herokuapp.com/movies/${movieId}`,
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    })
+    .then(
+      (response) => {
+        const data = response.data;
+        console.log(data);
+      }
+    )
+    .catch(
+      (err) => {
+        console.log(err);
+      }
+    )
 
-render(){
-  
-    // const movieId = this.props.match.params.movieId;
+    this.checkIsFavourited();
+  }
+
+  render(){
+
     const {
       movie,
       userInfo
     } = this.props;
-    console.log(movie);
-    
+
     console.log('MovieView props:', this.props);
     console.log('MovieView state:', this.state);
 
-    // if(!movie) return null;
+    if(!movie) return null;
     
     return (
 
@@ -203,7 +220,7 @@ render(){
         </Form.Group>
 
         <Form.Group>
-          {
+          {/* {
             this.props.userInfo.FavouriteMovies.find(
                 (favMovie) => favMovie === this.props.movie._id
               )
@@ -225,7 +242,7 @@ render(){
                 >
                 Add to Favourite
               </Button>
-          }
+          } */}
         </Form.Group>
 
         {'   '}
@@ -247,17 +264,17 @@ render(){
 
 }
 
-// MovieView.propTypes = {
+MovieView.propTypes = {
 
-//   movie: PropTypes.shape({
-//     Title: PropTypes.string.isRequired,
-//     Description: PropTypes.string.isRequired,
-//     ImagePath: PropTypes.string.isRequired,
-//     Genre: PropTypes.shape({
-//       Name: PropTypes.string
-//     }),
-//     Director: PropTypes.shape({
-//       Name: PropTypes.string
-//     })
-//   }).isRequired
-// }
+  movie: PropTypes.shape({
+    Title: PropTypes.string.isRequired,
+    Description: PropTypes.string.isRequired,
+    ImagePath: PropTypes.string.isRequired,
+    Genre: PropTypes.shape({
+      Name: PropTypes.string
+    }),
+    Director: PropTypes.shape({
+      Name: PropTypes.string
+    })
+  }).isRequired
+}
