@@ -127,10 +127,6 @@ export class MovieView extends React.Component{
     const token = localStorage.getItem('token');
     console.log('getMovie in <MovieView/>');
 
-    // if(!movie) {
-
-    //   const movieId
-
       axios({
         method:'get',
         url: `https://myflix-20210211.herokuapp.com/movies/${movieId}`,
@@ -150,18 +146,18 @@ export class MovieView extends React.Component{
         }
       )
 
-  // }
   
   this.checkIsFavourited();
 }
 
 render(){
   
-    const movieId = this.props.match.params.movieId;
-    // const {
-    //   movie
-    // } = this.props;
-
+    // const movieId = this.props.match.params.movieId;
+    const {
+      movie
+    } = this.props;
+    console.log(movie);
+    
     console.log('MovieView props:', this.props);
     console.log('MovieView state:', this.state);
 
