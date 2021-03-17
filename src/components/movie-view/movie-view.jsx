@@ -126,33 +126,39 @@ export class MovieView extends React.Component{
     const token = localStorage.getItem('token');
     console.log('getMovie in <MovieView/>');
 
-    axios.get({
-      method:'get',
-      url: `https://myflix-20210211.herokuapp.com/movies/${movieId}`,
-      headers: {
-        Authorization: `Bearer ${token}`
-      }
-    })
-    .then(
-      (response) => {
-        const data = response.data;
-        console.log(data);
-      }
-    )
-    .catch(
-      (err) => {
-        console.log(err);
-      }
-    )
+    // if(!movie) {
 
-    this.checkIsFavourited();
-  }
+    //   const movieId
 
-  render(){
+      axios({
+        method:'get',
+        url: `https://myflix-20210211.herokuapp.com/movies/${movieId}`,
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      })
+      .then(
+        (response) => {
+          const data = response.data;
+          console.log(data);
+        }
+      )
+      .catch(
+        (err) => {
+          console.log(err);
+        }
+      )
 
+  // }
+  
+  this.checkIsFavourited();
+}
+
+render(){
+  
+    // const movieId = this.props.match;
     const {
-      movie,
-      userInfo
+      movie
     } = this.props;
 
     console.log('MovieView props:', this.props);
@@ -220,7 +226,7 @@ export class MovieView extends React.Component{
         </Form.Group>
 
         <Form.Group>
-          {/* {
+          {
             this.props.userInfo.FavouriteMovies.find(
                 (favMovie) => favMovie === this.props.movie._id
               )
@@ -242,7 +248,7 @@ export class MovieView extends React.Component{
                 >
                 Add to Favourite
               </Button>
-          } */}
+          }
         </Form.Group>
 
         {'   '}
