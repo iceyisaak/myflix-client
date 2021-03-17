@@ -14,20 +14,12 @@ export function LoginView({
   // set the state
   const [username,setUsername] = useState('');
   const [password,setPassword] = useState('');
-  const [validated, setValidated] = useState(false);
 
   // When form is submitted, take in 'an event'
   const handleSubmit = (e) => {
 
     // Prevent page refresh
     e.preventDefault();
-
-    const form = e.currentTarget;
-    if(form.checkValidity() === false){
-      e.stopPropagation();
-    }
-
-    setValidated(true);
 
     // Sends a request to the server for authentication
     axios.post(
@@ -55,11 +47,7 @@ export function LoginView({
   
   return(
 
-    <Form 
-      noValidate
-      validated={validated}
-      onSubmit={handleSubmit}
-    >
+    <Form>
 
         <h1 className="h1">
           Welcome Back!
@@ -71,18 +59,12 @@ export function LoginView({
           Username:
         </Form.Label>
         <Form.Control 
-          required
           type="text"
           value={username}
           onChange={
             (e) => {setUsername(e.target.value)}
           }
         />
-        <Form.Control.Feedback
-          type="invalid"
-        >
-          Please enter your valid username
-        </Form.Control.Feedback>
       </Form.Group>
 
       <Form.Group controlId="formPassword">
@@ -90,19 +72,13 @@ export function LoginView({
         <Form.Label className="text-base">
           Password:
         </Form.Label>
-        <Form.Control
-          required 
+        <Form.Control 
           type="password"
           value={password}
           onChange={
             (e) => {setPassword(e.target.value)}
           }
-        />
-        <Form.Control.Feedback
-          type="invalid"
-        >
-          Please enter your valid password
-        </Form.Control.Feedback>
+          />
       </Form.Group>
       <Button
         variant="primary"
@@ -127,8 +103,11 @@ export function LoginView({
       </Link>
       </Form.Group>
     </Form>
+
+
   );
 }
+
 
 LoginView.propTypes = {
 

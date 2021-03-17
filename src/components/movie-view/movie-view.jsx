@@ -110,41 +110,20 @@ export class MovieView extends React.Component{
     )
   }
 
-  componentDidMount(movieId){
+  componentDidMount(){
 
-    // if(
-    //   this.props.userInfo.FavouriteMovies.find(
-    //     (favMovie) => favMovie === this.props.movie._id
-    //   )
-    // ){
+  //   if(
+  //     this.props.userInfo.FavouriteMovies.find(
+  //       (favMovie) => favMovie === this.props.movie._id
+  //     )
+  //   ){
 
-    //   this.setState({
-    //     favourited: true
-    //   })
+  //     this.setState({
+  //       favourited: true
+  //     })
 
-    // }
-    const username = localStorage.getItem('user');
-    const token = localStorage.getItem('token');
-    console.log('getMovie in <MovieView/>');
-
-      axios({
-        method:'get',
-        url: `https://myflix-20210211.herokuapp.com/movies/${movieId}`,
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
-      })
-      .then(
-        (response) => {
-          const data = response.data;
-          console.log(data);
-        }
-      )
-      .catch(
-        (err) => {
-          console.log(err);
-        }
-      )
+  //   }
+  // }
 
   
   this.checkIsFavourited();
@@ -154,7 +133,8 @@ render(){
   
     // const movieId = this.props.match.params.movieId;
     const {
-      movie
+      movie,
+      userInfo
     } = this.props;
     console.log(movie);
     

@@ -14,9 +14,14 @@ const FavouriteMovie = ({
     <div>
       <h1 className="my-5">Favourite Movies</h1>
       <Row>
+        {!userInfo.FavouriteMovies && 
+          <div>
+            No Favourite Movie
+          </div>
+        }
         {
-          userInfo.FavouriteMovies ?
-            movies.map(
+          userInfo.FavouriteMovies &&
+          movies.map(
             (movie) => {
               if (userInfo.FavouriteMovies.find(
                 (favMovie) => favMovie === movie._id)) {
@@ -31,14 +36,9 @@ const FavouriteMovie = ({
                   />
                 </Col>
                 );
-                }
-              }
-            )
-       :
-          <div>
-            No Favourite Movie
-          </div>
-     
+               }
+            }
+          )
         }
       </Row>
     </div>
