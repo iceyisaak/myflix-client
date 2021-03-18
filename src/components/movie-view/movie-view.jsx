@@ -27,8 +27,9 @@ export class MovieView extends React.Component{
     
     const username = localStorage.getItem('user');
     const token = localStorage.getItem('token');
+    const movieId = localStorage.getItem('id');
 
-  console.log('checkFavourited()',this.props.movie._id);
+  console.log('checkFavourited()', movieId);
 
     axios({
       method:'get',
@@ -42,9 +43,9 @@ export class MovieView extends React.Component{
         const favMovie = response.data.FavouriteMovies;
         console.log("favMovie ",favMovie);
       
-        const found = favMovie.find((fav) => fav === this.props.movie._id)
+        const found = favMovie.find((fav) => fav === movieId)
       console.log("found : ",found)
-        if(found !== this.props.movie._id){
+        if(found !== movieId){
 
           this.setState({
             favourited: false
@@ -129,7 +130,7 @@ export class MovieView extends React.Component{
     this.setState({id : localStorage.getItem('id') })
     const movieId=this.id
     console.log("ComponentDidMount movieId >> ", movieId)
-    console.log("this.state.id: ",this.state.id);
+    console.log("this.id: ",this.id);
     if (this.id === 'undefined') {
       
       
@@ -148,8 +149,8 @@ export class MovieView extends React.Component{
         (response) => {
             const movie = response.data;
             console.log("movie ",movie);
-            this.checkFavourited(); 
             localStorage.setItem('id', movie._id);
+            this.checkFavourited(); 
           }
         )
       .catch(
@@ -159,11 +160,11 @@ export class MovieView extends React.Component{
         )
          
     } else {
-      localStorage.setItem('id', movieId);
+      localStorage.setItem('id', this.props.movie._id);
       this.setState({
         id : movieId
       })
-      console.log("See movieId", movieId);
+      console.log("See movieId", this.props.movie._id);
 //      const movieId=this.id
       this.checkFavourited();
     }
