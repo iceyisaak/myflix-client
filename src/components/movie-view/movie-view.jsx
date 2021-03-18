@@ -169,9 +169,9 @@ export class MovieView extends React.Component{
       userInfo
     } = this.props; 
 
-    console.log('userInfo FavMovies: ',userInfo.FavouriteMovies);
+    console.log('userInfo FavMovies: ', userInfo.FavouriteMovies);
     
-    console.log('Props render : ',this.props);
+    console.log('Props render : ', this.props);
 
     if(!this.props.movie) return null;
     localStorage.setItem('id', this.props.movie._id);
