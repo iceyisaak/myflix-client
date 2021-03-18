@@ -3,6 +3,7 @@ import React from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 
+
 import Image from 'react-bootstrap/Image'
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
@@ -16,61 +17,20 @@ export class MovieView extends React.Component{
     super();
     this.state = {
       favourited: false,
-      id: ''
+      id: '',
+      username: '',
+      token: ''
+
     };
   }
 
-
-  handleAddToFavourite(movieId){
-    const username = localStorage.getItem('user');
-    const token = localStorage.getItem('token');
-
-    axios({
-      method: 'post',
-      url:`https://myflix-20210211.herokuapp.com/users/${username}/movies/${movieId}`,
-      headers: {
-        Authorization: `Bearer ${token}`
-      }
-    })
-      .then(
-        this.setState({
-          favourited: true
-        })
-      )
-      .catch(
-        (err) => {
-          console.log(err);
-        }
-      )
-  }
-  
-  handleRemoveFavourite(movieId){
-    const username = localStorage.getItem('user');
-    const token = localStorage.getItem('token');
-
-    axios({
-      method: 'put',
-      url: `https://myflix-20210211.herokuapp.com/users/${username}/movies/${movieId}`,
-      headers: { 
-        Authorization: `Bearer ${token}` 
-      }
-    })
-    .then(
-      this.setState({
-        favourited: false
-      })
-    )
-    .catch(
-      (err) => {
-        console.log(err);
-      }
-    )
-  }
-
   checkFavourited(){
-    console.log('checkFavourited()');
+    
     const username = localStorage.getItem('user');
     const token = localStorage.getItem('token');
+
+  console.log('checkFavourited()',this.props.movie._id);
+
     axios({
       method:'get',
       url: `https://myflix-20210211.herokuapp.com/users/${username}`,
@@ -83,23 +43,22 @@ export class MovieView extends React.Component{
         const favMovie = response.data.FavouriteMovies;
         console.log("favMovie ",favMovie);
       
-        favMovie.find(
-          (favMovie) => favMovie === this.movieId
-        )
-
-        if(favMovie){
-
-          this.setState({
-            favourited: true
-          })
-
-        }else{
+        const found = favMovie.find((fav) => fav === this.props.movie._id)
+      console.log("found : ",found)
+        if(found !== this.props.movie._id){
 
           this.setState({
             favourited: false
           })
 
+        }else{
+
+          this.setState({
+            favourited: true
+          })
+
         }
+        
 
       }
     )
@@ -110,39 +69,102 @@ export class MovieView extends React.Component{
     )  
   }
 
+  handleAddToFavourite(){
+    const username = localStorage.getItem('user');
+    const token = localStorage.getItem('token');
+    const movieId = localStorage.getItem('id');
 
+    axios({
+      method: 'post',
+      url:`https://myflix-20210211.herokuapp.com/users/${username}/movies/${movieId}`,
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    })
+      .then(
+        (response) => {
+          const data = response.data;
+ //         console.log(data);
+          this.setState({
+            favourited: true
+          })
+        }
+      )
+      .catch(
+        (err) => {
+          console.log(err);
+        }
+      )
+  }
+  
+  handleRemoveFavourite(){
+    const username = localStorage.getItem('user');
+    const token = localStorage.getItem('token');
+    const movieId = localStorage.getItem('id');
+
+    axios({
+      method: 'put',
+      url: `https://myflix-20210211.herokuapp.com/users/${username}/movies/${movieId}`,
+      headers: { 
+        Authorization: `Bearer ${token}` 
+      }
+    })
+    .then(
+      (response) => {
+        const movie = response.data;
+ //       console.log(movie);
+        this.setState({
+          favourited: false
+        })   
+      }
+    )
+    .catch(
+      (err) => {
+        console.log(err);
+      }
+    )
+  }
 
   componentDidMount(){
    
-    this.setState({
-      id : localStorage.getItem('id') 
-    }) 
-
-    const movieId = this.id
-    console.log("ComponentDidMount movieId >> ", movieId)
-
+    this.setState({id : localStorage.getItem('id') })
+    const movieId=this.id
+console.log("ComponentDidMount movieId >> ", movieId)
     if (this.id === 'undefined') {
       
-      this.setState({
-        id : localStorage.getItem('id')
-      })
-
+      
+      this.setState({id : localStorage.getItem('id') })
+      const movieId=this.id
       console.log('Param',this.id)
 
-      this.checkFavourited();
-
-      
+      axios.get({
+        method:'get',
+        url: `https://myflix-20210211.herokuapp.com/movies/${movieId}`,
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    })
+      .then(
+        (response) => {
+              const movie = response.data;
+              console.log("movie ",movie);
+              this.checkFavourited() 
+              }
+        )
+      .catch(
+        (err) => {
+              console.log(err);
+              }
+        )
+         
     } else {
       localStorage.setItem('id', movieId);
-      this.setState({
-        id : movieId 
-      })
+      this.setState({id : movieId })
+//      const movieId=this.id
+      this.checkFavourited()
     }
 
-    // this.checkFavourited();
-
-    console.log(this.props.userInfo);
-  
+/* 
     if(
       this.props.userInfo.FavouriteMovies.find(
         (favMovie) => favMovie === this.props.movie._id
@@ -153,28 +175,24 @@ export class MovieView extends React.Component{
         favourited: true
       })
 
-    }else{
-
-      this.setState({
-        favourited: false
-      })
-
     }
-    
+    */
   } 
-
+  ComponentDidUpdate(){
+    console.log("ComponentDidUpdate")
+  }  
   render(){
-    const { 
-      movie,
-      userInfo
-    } = this.props; 
-
-    console.log('userInfo FavMovies: ', userInfo.FavouriteMovies);
+    const { movie,userInfo } = this.props; 
     
-    console.log('Props render : ', this.props);
+    console.log('Props render : ',this.props);
 
+    
     if(!this.props.movie) return null;
     localStorage.setItem('id', this.props.movie._id);
+ //   this.setState({id : this.props.movie._id })
+ //   const username = localStorage.getItem('user');
+ //   const token = localStorage.getItem('token');
+ //   this.checkFavourited()
     
     return (
 
@@ -241,9 +259,9 @@ export class MovieView extends React.Component{
               variant="outline-danger"
               className="mt-3"
               size="lg"
-              onClick={()=>this.handleRemoveFavourite(movie._id)}
-            >
-              Unfavourite
+              onClick={()=>this.handleRemoveFavourite()}
+              >
+                Unfavourite
             </Button>
           }
           { !this.state.favourited &&
@@ -251,8 +269,8 @@ export class MovieView extends React.Component{
               variant="primary"
               className="mt-3"
               size="lg"
-              onClick={()=>this.handleAddToFavourite(movie._id)}
-            >
+              onClick={()=>this.handleAddToFavourite()}
+              >
               Add to Favourite
             </Button>
           }
