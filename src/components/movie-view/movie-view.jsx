@@ -20,7 +20,6 @@ export class MovieView extends React.Component{
       id: '',
       username: '',
       token: ''
-
     };
   }
 
@@ -129,7 +128,8 @@ export class MovieView extends React.Component{
    
     this.setState({id : localStorage.getItem('id') })
     const movieId=this.id
-console.log("ComponentDidMount movieId >> ", movieId)
+    console.log("ComponentDidMount movieId >> ", movieId)
+    console.log("this.state.id: ",this.state.id);
     if (this.id === 'undefined') {
       
       
@@ -146,10 +146,11 @@ console.log("ComponentDidMount movieId >> ", movieId)
     })
       .then(
         (response) => {
-              const movie = response.data;
-              console.log("movie ",movie);
-              this.checkFavourited() 
-              }
+            const movie = response.data;
+            console.log("movie ",movie);
+            this.checkFavourited(); 
+            localStorage.setItem('id', movie._id);
+          }
         )
       .catch(
         (err) => {
@@ -159,9 +160,12 @@ console.log("ComponentDidMount movieId >> ", movieId)
          
     } else {
       localStorage.setItem('id', movieId);
-      this.setState({id : movieId })
+      this.setState({
+        id : movieId
+      })
+      console.log("See movieId", movieId);
 //      const movieId=this.id
-      this.checkFavourited()
+      this.checkFavourited();
     }
 
 /* 
