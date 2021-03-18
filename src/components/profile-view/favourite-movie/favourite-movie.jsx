@@ -34,11 +34,10 @@ const FavouriteMovie = ({
                 }
               }
             )
-       :
+        :
           <div>
             No Favourite Movie
           </div>
-     
         }
       </Row>
     </div>
