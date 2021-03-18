@@ -131,8 +131,7 @@ export class MovieView extends React.Component{
     const movieId=this.id
     console.log("ComponentDidMount movieId >> ", movieId)
     console.log("this.id: ",this.id);
-    if (this.id === 'undefined') {
-      
+    if (this.id == 'undefined') {
       
       this.setState({id : localStorage.getItem('id') })
       const movieId=this.id
