@@ -22,7 +22,8 @@ export function LoginView({
     e.preventDefault();
 
     // Sends a request to the server for authentication
-    axios.post(
+    axios
+      .post(
         'https://myflix-20210211.herokuapp.com/login',
         {
           Username: username,
