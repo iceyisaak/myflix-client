@@ -16,50 +16,66 @@ export class MovieView extends React.Component{
   constructor(){
     super();
     this.state = {
-      favourited: false,
-      id: '',
-      username: '',
-      token: ''
+      favourited: false,     
     };
+    this.username = localStorage.getItem('user');
+    this.token = localStorage.getItem('token');
+    this.movieId = localStorage.getItem('id');   
+    
+    console.log("constructor >> movieId : ",this.movieId)
   }
 
-  checkFavourited(){
-    
-    const username = localStorage.getItem('user');
-    const token = localStorage.getItem('token');
-    const movieId = localStorage.getItem('id');
+  getMovie(){
+    axios.get({
+      method:'get',
+      url: `https://myflix-20210211.herokuapp.com/movies/${this.movieId}`,
+      headers: {
+          Authorization: `Bearer ${this.token}`
+      }
+  })
+    .then(
+      (response) => {
+            const data = response.data;            
+            this.getFavourited() 
 
-  console.log('checkFavourited()', movieId);
+            }
+      )
+    .catch(
+      (err) => {
+            console.log(err);
+            }
+      )      
+  }
+  
+  getFavourited(){
+    
+  console.log('checkFavourited()',this.movieId);
 
     axios({
       method:'get',
-      url: `https://myflix-20210211.herokuapp.com/users/${username}`,
+      url: `https://myflix-20210211.herokuapp.com/users/${this.username}`,
       headers: {
-          Authorization: `Bearer ${token}`
+          Authorization: `Bearer ${this.token}`
       }
     })
     .then(
       (response) => {
         const favMovie = response.data.FavouriteMovies;
-        console.log("favMovie ",favMovie);
+        console.log("favMovie >> ",favMovie);
       
-        const found = favMovie.find((fav) => fav === movieId)
-      console.log("found : ",found)
-        if(found !== movieId){
-
+        const found = favMovie.find((fav) => fav === this.movieId)
+      
+        console.log("found : ",found)
+        
+        if(found !== this.movieId){
           this.setState({
             favourited: false
           })
-
         }else{
-
           this.setState({
             favourited: true
           })
-
-        }
-        
-
+        }        
       }
     )
     .catch(
@@ -70,24 +86,19 @@ export class MovieView extends React.Component{
   }
 
   handleAddToFavourite(){
-    const username = localStorage.getItem('user');
-    const token = localStorage.getItem('token');
-    const movieId = localStorage.getItem('id');
-
+ 
     axios({
       method: 'post',
-      url:`https://myflix-20210211.herokuapp.com/users/${username}/movies/${movieId}`,
+      url:`https://myflix-20210211.herokuapp.com/users/${this.username}/movies/${this.movieId}`,
       headers: {
-        Authorization: `Bearer ${token}`
+        Authorization: `Bearer ${this.token}`
       }
     })
       .then(
         (response) => {
-          const data = response.data;
- //         console.log(data);
-          this.setState({
-            favourited: true
-          })
+ 
+            this.setState({favourited: true})
+         
         }
       )
       .catch(
@@ -98,24 +109,18 @@ export class MovieView extends React.Component{
   }
   
   handleRemoveFavourite(){
-    const username = localStorage.getItem('user');
-    const token = localStorage.getItem('token');
-    const movieId = localStorage.getItem('id');
 
     axios({
       method: 'put',
-      url: `https://myflix-20210211.herokuapp.com/users/${username}/movies/${movieId}`,
+      url: `https://myflix-20210211.herokuapp.com/users/${this.username}/movies/${this.movieId}`,
       headers: { 
-        Authorization: `Bearer ${token}` 
+        Authorization: `Bearer ${this.token}` 
       }
     })
     .then(
       (response) => {
-        const movie = response.data;
- //       console.log(movie);
-        this.setState({
-          favourited: false
-        })   
+ 
+          this.setState({favourited: false})        
       }
     )
     .catch(
@@ -124,79 +129,25 @@ export class MovieView extends React.Component{
       }
     )
   }
-
+ 
   componentDidMount(){
+
    
-    this.setState({id : localStorage.getItem('id') })
-    const movieId=this.id
-    console.log("ComponentDidMount movieId >> ", movieId)
-    console.log("this.id: ",this.id);
-    if (this.id == 'undefined') {
-      
-      this.setState({id : localStorage.getItem('id') })
-      const movieId=this.id
-      console.log('Param',this.id)
+console.log("ComponentDidMount movieId >> ", this.movieId)
 
-      axios.get({
-        method:'get',
-        url: `https://myflix-20210211.herokuapp.com/movies/${movieId}`,
-        headers: {
-            Authorization: `Bearer ${token}`
-        }
-    })
-      .then(
-        (response) => {
-            const movie = response.data;
-            console.log("movie ",movie);
-            localStorage.setItem('id', movie._id);
-            this.checkFavourited(); 
-          }
-        )
-      .catch(
-        (err) => {
-              console.log(err);
-              }
-        )
-         
-    } else {
-      localStorage.setItem('id', this.props.movie._id);
-      this.setState({
-        id : movieId
-      })
-      console.log("See movieId", this.props.movie._id);
-//      const movieId=this.id
-      this.checkFavourited();
-    }
+     this.getMovie()        
 
-/* 
-    if(
-      this.props.userInfo.FavouriteMovies.find(
-        (favMovie) => favMovie === this.props.movie._id
-      )
-    ){
-
-      this.setState({
-        favourited: true
-      })
-
-    }
-    */
   } 
-  ComponentDidUpdate(){
-    console.log("ComponentDidUpdate")
-  }  
+  
   render(){
-    const { movie,userInfo } = this.props; 
+ 
+    const { movie } = this.props; 
     
     console.log('Props render : ',this.props);
 
     
-    if(!this.props.movie) return null;
-    localStorage.setItem('id', this.props.movie._id);
- //   this.setState({id : this.props.movie._id })
- //   const username = localStorage.getItem('user');
- //   const token = localStorage.getItem('token');
- //   this.checkFavourited()
+   if(!movie) return null;
+ 
     
     return (
 

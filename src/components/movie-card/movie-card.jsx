@@ -10,6 +10,10 @@ import './movie-card.scss';
 
 export class MovieCard extends React.Component{
 
+  setMovieId(movieId){
+    localStorage.setItem('id', movieId);
+  }
+
   render(){
 
     // <MovieCard/> takes in the props from <MainView/>
@@ -47,6 +51,7 @@ export class MovieCard extends React.Component{
                     variant="link"
                     size="lg"
                     block
+                    onClick={()=>this.setMovieId(movie._id)}
                     >
                     See Details
                   </Button>
