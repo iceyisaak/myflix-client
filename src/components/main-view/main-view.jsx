@@ -1,9 +1,16 @@
 import React from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import axios from 'axios';
+
+// Import actions
+import {setMovies} from '../../actions/actions';
+
+// Bootstrap Components
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
+
+import MoviesList from '../movies-list/movies-list';
 
 // Import all the children components to be used
 import Navigation from '../Navigation/Navigation';
@@ -14,9 +21,10 @@ import { RegistrationView } from '../registration-view/registration-view';
 import { GenreView } from '../genre-view/genre-view';
 import { DirectorView } from '../director-view/director-view';
 import { ProfileView } from '../profile-view/profile-view';
+import { connect } from 'formik';
 
 
-export class MainView extends React.Component {
+class MainView extends React.Component {
 
   // Construct the component
   constructor() {
@@ -25,15 +33,15 @@ export class MainView extends React.Component {
     super();
 
     // Initialse the states for this component
-    this.state = {
+    this.state = {  
       movies: [],
       user: null,
       userInfo:[],
       profile: {
-        Username:'',
-        Password:'',
-        Email:'',
-        Birthday:''
+        Username: '',
+        Password: '',
+        Email: '',
+        Birthday: ''
       }
     };
   }
@@ -121,9 +129,7 @@ export class MainView extends React.Component {
         (response) => {
 
           // setState of 'movies' to be 'response.data' from API
-          this.setState({
-            movies: response.data
-          });
+          this.props.setMovies(response.data);
         }
       )
 
@@ -166,9 +172,13 @@ export class MainView extends React.Component {
   // Render the component
   render() {
 
+    // Destructure the props
+    const {
+      movies
+    } = this.props;
+
     // Destructure the states
     const { 
-      movies,
       user,
       userInfo,
     } = this.state;
@@ -325,3 +335,13 @@ export class MainView extends React.Component {
   }
 }
 
+const mapStateToProps = (state) => {
+  return {
+    movies: state.movies
+  }
+}
+
+export default connect(
+  mapStateToProps,
+  {setMovies}
+)(MainView);

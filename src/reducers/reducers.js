@@ -4,17 +4,20 @@ import {
   SET_MOVIES
 } from '../actions/actions';
 
-
+// reducer function
 function visibilityFilter(
+  // takes in initial state and action
   state = "",
   action
 ) {
 
+  // Check for the action.type that matches
   switch (action.type) {
 
     case SET_FILTER:
       return action.value;
 
+    // In case no match is found, return initial state
     default:
       return state;
 
@@ -37,20 +40,11 @@ function movies(
   }
 }
 
-function moviesApp(
-  state = {},
-  action
-) {
-  return {
-    visibilityFilter: visibilityFilter(
-      state.visibilityFilter,
-      action
-    ),
-    movies: movies(
-      state.movies,
-      action
-    )
-  };
-}
+// Group the reducers together into 'movieApp' with combineReducers
+const moviesApp = combineReducers({
+  visibilityFilter,
+  movies
+});
 
+// export the reducer functions
 export default moviesApp;
