@@ -342,5 +342,6 @@ const mapStateToProps = (state) => {
 }
 
 export default connect(
-  mapStateToProps
+  mapStateToProps,
+  { setMovies }
 )(MainView);
