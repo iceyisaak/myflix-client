@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 // Import createStore & Provider
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
-// import {devToolsEnhancer} from 'redux-devtools-extension';
+import {devToolsEnhancer} from 'redux-devtools-extension';
 
 // Import MainView Component
 import MainView from './components/main-view/main-view';
@@ -16,7 +16,10 @@ import moviesApp from './reducers/reducers';
 import './index.scss';
 
 // createStore for movieApp
-const store = createStore(moviesApp);
+const store = createStore(
+  moviesApp,
+  devToolsEnhancer()
+);
 
 // Main Component
 class MyFlixApp extends React.Component{

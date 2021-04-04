@@ -21,7 +21,7 @@ import { RegistrationView } from '../registration-view/registration-view';
 import { GenreView } from '../genre-view/genre-view';
 import { DirectorView } from '../director-view/director-view';
 import { ProfileView } from '../profile-view/profile-view';
-import { connect } from 'formik';
+import { connect } from 'react-redux';
 
 
 class MainView extends React.Component {
@@ -342,6 +342,5 @@ const mapStateToProps = (state) => {
 }
 
 export default connect(
-  mapStateToProps,
-  {setMovies}
+  mapStateToProps
 )(MainView);
