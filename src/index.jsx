@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 // Import createStore & Provider
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
-import {devToolsEnhancer} from 'redux-devtools-extension';
+import { devToolsEnhancer } from 'redux-devtools-extension';
 
 // Import MainView Component
 import MainView from './components/main-view/main-view';

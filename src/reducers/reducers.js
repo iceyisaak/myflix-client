@@ -4,8 +4,10 @@ import {
   SET_MOVIES
 } from '../actions/actions';
 
-// reducer function
+
+
 function visibilityFilter(
+
   // takes in initial state and action
   state = "",
   action
@@ -23,6 +25,7 @@ function visibilityFilter(
 
   }
 }
+
 
 function movies(
   state = [],
