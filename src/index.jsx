@@ -27,7 +27,7 @@ class MyFlixApp extends React.Component{
   render() {
     return (
 
-      // Wrap store around <MainView/> to give access to store for entire app
+      // Providing access to store for the entire app
       <Provider store={store}>
         <MainView/>
       </Provider>

@@ -3,14 +3,12 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import axios from 'axios';
 
 // Import actions
-import {setMovies} from '../../actions/actions';
+import { setMovies } from '../../actions/actions';
 
 // Bootstrap Components
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
-
-import MoviesList from '../movies-list/movies-list';
 
 // Import all the children components to be used
 import Navigation from '../Navigation/Navigation';
@@ -21,6 +19,8 @@ import { RegistrationView } from '../registration-view/registration-view';
 import { GenreView } from '../genre-view/genre-view';
 import { DirectorView } from '../director-view/director-view';
 import { ProfileView } from '../profile-view/profile-view';
+import MoviesList from '../movies-list/movies-list';
+
 import { connect } from 'react-redux';
 
 
@@ -34,7 +34,7 @@ class MainView extends React.Component {
 
     // Initialse the states for this component
     this.state = {  
-      movies: [],
+      // movies: [],
       user: null,
       userInfo:[],
       profile: {
@@ -128,7 +128,7 @@ class MainView extends React.Component {
         // take in 'response' data
         (response) => {
 
-          // setState of 'movies' to be 'response.data' from API
+          // Assign API response to the prop setMovies()
           this.props.setMovies(response.data);
         }
       )
@@ -219,21 +219,10 @@ class MainView extends React.Component {
                     />
                   );
                 }
-                  return (
-                    movies.map(
-                      (movie) => 
-                        <Col 
-                          md={4} 
-                          key={movie._id}
-                          className="my-4"
-                        >
-                          <MovieCard 
-                            movie={movie}
-                          />
-                        </Col>
-                      
-                    )
-                  )
+                
+                return (
+                  <MoviesList movies={movies}/>
+                )
               }
             }
           />
@@ -335,13 +324,25 @@ class MainView extends React.Component {
   }
 }
 
+// mapStateToProps to subscribe to store update
 const mapStateToProps = (state) => {
+
   return {
+
+    // Mapping 'movies' prop to the state
     movies: state.movies
+    
   }
 }
 
+// export component + connecting it to store 
 export default connect(
+
+  // Take in the store state 
   mapStateToProps,
+
+  // Dispatching Action
   { setMovies }
+
+  // Name of this exported component
 )(MainView);

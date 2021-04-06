@@ -1,8 +1,13 @@
 import React from 'react';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 
 import VisibilityFilterInput from '../visibility-filter-input/visibility-filter-input';
 import { MovieCard } from '../movie-card/movie-card';
+import Col from 'react-bootstrap/Col';
+import Row from 'react-bootstrap/Row';
+import Container from 'react-bootstrap/Container';
+
+import './movies-list.scss';
 
 const mapStateToProps = (state) => {
   const {visibilityFilter} = state;
@@ -16,7 +21,7 @@ function MoviesList (props) {
     visibilityFilter
   } = props;
 
-  const filteredMovies = movies;
+  let filteredMovies = movies;
 
   if(visibilityFilter !== ''){
     filteredMovies = movies.filter(
@@ -27,24 +32,33 @@ function MoviesList (props) {
   if(!movies) return <div className='main-view'/>;
 
   return (
-    
-    <div className="movie-list">
+    <div className="movies-list">
       <VisibilityFilterInput
         visibilityFilter={visibilityFilter}
       />
-      {
-        filteredMovies.map(
-          m => {
-            <MovieCard
-              key={m._id}
-              movie={m}
-            />
+      <Container>
+        <Row>
+          {
+            filteredMovies.map(
+              (movie) => 
+              <Col 
+                md={4} 
+                key={movie._id}
+                className="my-4"
+              >
+                <MovieCard 
+                  movie={movie}
+                />
+              </Col>
+            )
           }
-        )
-      }
-    </div>
+        </Row>
 
+      </Container>
+    </div>
   )
+
+
 }
 
 export default connect(
