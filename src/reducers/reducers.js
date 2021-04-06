@@ -43,6 +43,20 @@ function movies(
   }
 }
 
+function user(
+  state = '',
+  action
+) {
+  switch (action.type) {
+
+    case SET_USER:
+      return action.value;
+
+    default:
+      return state;
+  }
+}
+
 // Group the reducers together into 'movieApp' with combineReducers
 const moviesApp = combineReducers({
   visibilityFilter,

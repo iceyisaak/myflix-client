@@ -12,7 +12,6 @@ import Container from 'react-bootstrap/Container';
 
 // Import all the children components to be used
 import Navigation from '../Navigation/Navigation';
-import { MovieCard } from '../movie-card/movie-card';
 import { MovieView } from '../movie-view/movie-view';
 import { LoginView } from '../login-view/login-view';
 import { RegistrationView } from '../registration-view/registration-view';
@@ -35,14 +34,14 @@ class MainView extends React.Component {
     // Initialse the states for this component
     this.state = {  
       // movies: [],
-      user: null,
-      userInfo:[],
-      profile: {
-        Username: '',
-        Password: '',
-        Email: '',
-        Birthday: ''
-      }
+      // user: null,
+      // userInfo:[],
+      // profile: {
+      //   Username: '',
+      //   Password: '',
+      //   Email: '',
+      //   Birthday: ''
+      // }
     };
   }
 
@@ -219,7 +218,7 @@ class MainView extends React.Component {
                     />
                   );
                 }
-                
+
                 return (
                   <MoviesList movies={movies}/>
                 )
