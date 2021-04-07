@@ -1,6 +1,6 @@
 # MyFlix App
 
-###### Last Updated 20210213
+###### Last Updated 20210407
 
 ​
 
@@ -30,7 +30,7 @@
 2. How to get the project running:  
    ​
 
-   1. Run `parcel src/index.html`
+   1. Run `npm run dev`
    2. The project will be served at: `localhost:1234`
 
       ​
@@ -46,16 +46,30 @@
    - Dependencies:
 
      ```
-     "babel-plugin-transform-class-properties": "^6.24.1",
-     "react": "^17.0.1",
-     "react-dom": "^17.0.1"
+      "axios": "^0.21.1",
+      "babel-plugin-transform-class-properties": "^6.24.1",
+      "bootstrap": "^4.6.0",
+      "formik": "^2.2.6",
+      "moment": "^2.29.1",
+      "prop-types": "^15.7.2",
+      "react": "^17.0.1",
+      "react-bootstrap": "^1.5.0",
+      "react-dom": "^17.0.1",
+      "react-icon": "^1.0.0",
+      "react-icons": "^4.2.0",
+      "react-redux": "^7.2.3",
+      "react-router-dom": "^5.2.0",
+      "redux": "^4.0.5",
+      "redux-devtools-extension": "^2.13.9",
+      "yup": "^0.32.9",
+      "parcel-bundler": "^1.12.5"
      ```
 
    - DevDependencies:
 
      ```
-     "babel-core": "^6.26.3",
-     "babel-preset-env": "^1.7.0",
-     "babel-preset-react": "^6.24.1",
-     "sass": "^1.32.7"
+      "babel-core": "^6.26.3",
+      "babel-preset-env": "^1.7.0",
+      "babel-preset-react": "^6.24.1",
+      "sass": "^1.32.7"
      ```
