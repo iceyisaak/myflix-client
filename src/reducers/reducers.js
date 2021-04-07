@@ -1,7 +1,8 @@
 import { combineReducers } from 'redux';
 import {
   SET_FILTER,
-  SET_MOVIES
+  SET_MOVIES,
+  SET_USER
 } from '../actions/actions';
 
 
@@ -60,7 +61,8 @@ function user(
 // Group the reducers together into 'movieApp' with combineReducers
 const moviesApp = combineReducers({
   visibilityFilter,
-  movies
+  movies,
+  user
 });
 
 // export the reducer functions

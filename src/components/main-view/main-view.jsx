@@ -323,6 +323,15 @@ class MainView extends React.Component {
   }
 }
 
+
+const mapDispatchToProps = (dispatch) => {
+
+  return{
+    setMovies: () => dispatch(setMovies()),
+    setUser: () => dispatch(setUser())
+  }
+}
+
 // mapStateToProps to subscribe to store update
 const mapStateToProps = (state) => {
 
@@ -341,7 +350,7 @@ export default connect(
   mapStateToProps,
 
   // Dispatching Action
-  { setMovies }
+  {setMovies}
 
   // Name of this exported component
 )(MainView);
